@@ -18,9 +18,10 @@ export default function SearchBar({ setCountreiesFiltered, data }) {
       <div className="flex border border-purple-200 rounded w-8/12">
         <input
           type="text"
-          className="text-center block px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40 flex-grow"
+          className="text-center block px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40 w-full"
           placeholder="Buscar un pais"
           onChange={handleSearchCountrie}
+          style={{ boxSizing: "border-box" }}
         />
       </div>
     </div>

@@ -1,10 +1,10 @@
 import React from "react";
-import useFetch from "../../Hooks/useFetch";
-import { LEAGUE_URL } from "../../services";
+import useFetch from "../../../../Hooks/useFetch";
+import { LEAGUE_URL } from "../../../../services";
+import LoaderCards from "../LoaderCars/LoaderCards";
 
-export default function Leagues({ setCountryId, countryId }) {
+export default function Leagues({ countryId, setLeagueId }) {
   const { data, loading } = useFetch(LEAGUE_URL(countryId));
-  console.log(data);
 
   return loading && data?.[0]?.country_name ? (
     <p className="text-center text-lg items-center justify-center flex">
@@ -21,8 +21,11 @@ export default function Leagues({ setCountryId, countryId }) {
         <p className="text-lg">{data?.[0]?.country_name}</p>
       </div>
       <div className="flex-grow overflow-y-auto p-3 grid grid-cols-3 gap-4 ">
-        {data?.map(({ league_name, league_logo, country_logo }) => (
-          <div>
+        {data?.map(({ league_name, league_logo, country_logo, league_id }) => (
+          <div
+            className="cursor-pointer"
+            onClick={() => setLeagueId(league_id)}
+          >
             <img
               className="max-w-full rounded-lg h-20 w-24 object-cover"
               src={league_logo ? league_logo : country_logo}

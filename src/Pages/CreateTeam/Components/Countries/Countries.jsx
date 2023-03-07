@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import useFetch from "../../Hooks/useFetch";
-import { COUNTRIES_URL } from "../../services";
+import useFetch from "../../../../Hooks/useFetch";
+import { COUNTRIES_URL } from "../../../../services";
 import SearchBar from "./SearchBar";
 
 export default function Countries({ setCountryId }) {

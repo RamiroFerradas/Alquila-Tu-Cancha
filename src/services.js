@@ -1,7 +1,15 @@
 const { VITE_APIKEY } = import.meta.env;
+const BASE_URL = `https://apiv3.apifootball.com/`;
 
-export const COUNTRIES_URL = `https://apiv3.apifootball.com/?action=get_countries&APIkey=${VITE_APIKEY}`;
+const getAPIURL = (action, params = {}, apikey = VITE_APIKEY) => {
+  const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${value}`)
+    .join("&");
+  return `${BASE_URL}?action=${action}&${queryString}&APIkey=${apikey}`;
+};
 
+export const COUNTRIES_URL = getAPIURL("get_countries");
 export const LEAGUE_URL = (country_id) =>
-  country_id &&
-  `https://apiv3.apifootball.com/?action=get_leagues&country_id=${country_id}&APIkey=${VITE_APIKEY}`;
+  country_id && getAPIURL("get_leagues", { country_id });
+export const TEAMS_URL = (league_id) =>
+  league_id && getAPIURL("get_teams", { league_id });
