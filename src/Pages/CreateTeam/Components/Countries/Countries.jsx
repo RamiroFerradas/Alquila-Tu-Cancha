@@ -32,6 +32,7 @@ export default function Countries({ setCountryId }) {
                     : data?.[data.length - 3].country_logo
                 }
                 alt={country_name}
+                loading="lazy"
               />
             </div>
           )

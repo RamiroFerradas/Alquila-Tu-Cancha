@@ -9,7 +9,9 @@ const getAPIURL = (action, params = {}, apikey = VITE_APIKEY) => {
 };
 
 export const COUNTRIES_URL = getAPIURL("get_countries");
-export const LEAGUE_URL = (country_id) =>
+export const LEAGUES_URL = (country_id) =>
   country_id && getAPIURL("get_leagues", { country_id });
 export const TEAMS_URL = (league_id) =>
   league_id && getAPIURL("get_teams", { league_id });
+export const PLAYER_URL = (player_name) =>
+  player_name && getAPIURL("get_players", { player_name });

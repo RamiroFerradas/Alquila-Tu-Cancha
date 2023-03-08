@@ -4,6 +4,7 @@ import Leagues from "../Leagues/Leagues";
 import Navmenu from "../../../../Components/Navmenu/Navmenu";
 import Teams from "../Teams/Teams";
 import Players from "../Players/Players";
+import Details from "../Players/Details";
 
 export default function HomeCreateTeam() {
   const [countryId, setCountryId] = useState("");
@@ -18,8 +19,9 @@ export default function HomeCreateTeam() {
         setShowModal={setShowModal}
         players={players}
       />
+      <Details />
       <Navmenu />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-4/5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-4/5 overflow-y-auto">
         <Countries setCountryId={setCountryId} />
         <Leagues
           setCountryId={setCountryId}
