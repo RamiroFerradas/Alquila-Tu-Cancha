@@ -2,7 +2,6 @@ import { useCallback, useState, Fragment } from "react";
 import player_unknown from "../../Assets/Player/profile_player.png";
 import { FaWindowClose } from "react-icons/fa";
 import Details from "./Details";
-import { GrAdd } from "react-icons/gr";
 import Swal from "sweetalert2";
 
 import { useTeams } from "../../../../Hooks/useTeams";
@@ -10,24 +9,26 @@ import TeamsIndicator from "./TeamsIndicator";
 import {
   Button,
   Dialog,
-  DialogHeader,
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
 
-export default function Players({ showModal, setShowModal, players }) {
+export default function Players({
+  showModal,
+  setShowModal,
+  players,
+  teamName,
+}) {
   const [playerName, setPlayerName] = useState();
   const [playerImage, setPlayerImage] = useState();
   const [openDetail, setOpenDetail] = useState(false);
   const { team1, team2, setteam1, setteam2, selectPlayer } = useTeams();
 
   const handleOpenModal = (e) => {
-    e?.stopPropagation();
     setShowModal(!showModal);
   };
   const handleOpen = (e) => {
     setOpenDetail(!openDetail);
-    // e.stopPropagation();
   };
 
   const team1Complete = team1.players.length === 5;
@@ -123,41 +124,52 @@ export default function Players({ showModal, setShowModal, players }) {
   };
 
   return (
-    <div>
-      {/* <div
-        className={`z-10 fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm ${
-          showModal ? "block" : "hidden"
-        }`}
-        onClick={(event) => {
-          setShowModal(false);
-          event.stopPropagation();
+    <Fragment>
+      <Dialog
+        open={showModal}
+        handler={(e) => handleOpenModal(e)}
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0.9, y: -100 },
         }}
+        size="xl"
+        className="bg-gradient-to-bl from-lime-200 via-white to-orange-200 z-10  rounded-3xl "
       >
-        {openDetail && (
-          <Details
-            playerName={playerName}
-            playerImage={playerImage}
-            setOpenDetail={setOpenDetail}
-            openDetail={openDetail}
-            handleOpen={handleOpen}
-            setShowModal={setShowModal}
-          />
-        )}
-        {
-          <>
+        <DialogBody>
+          {openDetail && (
+            <Details
+              playerName={playerName}
+              playerImage={playerImage}
+              setOpenDetail={setOpenDetail}
+              openDetail={openDetail}
+              handleOpen={handleOpen}
+              setShowModal={setShowModal}
+            />
+          )}
+          <p className="text-center p-0 m-0 right-0 absolute left-0 top-1 text-xl font-bold ">
+            {teamName}
+          </p>
+
+          {!players ? (
+            <div className="h-96 flex justify-center items-center">
+              <p>Cargando...</p>
+            </div>
+          ) : (
             <div
               onClick={(event) => event.stopPropagation()}
-              className="bg-lime-500 p-4 mx-auto mt-12 container rounded-3xl "
+              className="bg-lime-500 p-1 mt-5 rounded-2xl"
             >
-              <div className="flex justify-between mx-5 mb-4">
+              <div className="flex justify-between mx-5">
                 <div>{TeamsIndicator(team1)}</div>
-                <p>{}</p>
+                <div>
+                  <input type="search" />
+                </div>
                 <div>{TeamsIndicator(team2)}</div>
               </div>
-              <div className=" p-1 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 overflow-auto rounded-xl">
+              <div className="p-1 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 overflow-auto rounded-xl overflow-y-scroll h-96">
                 {!openDetail && (
                   <button
-                    className="absolute top-0 right-0 p-2"
+                    className="absolute top-0 right-0"
                     onClick={() => setShowModal(false)}
                   >
                     <p className="text-2xl absolute top-0 right-0 p-2">
@@ -171,11 +183,11 @@ export default function Players({ showModal, setShowModal, players }) {
                   return (
                     <div
                       key={ele.player_name}
-                      className="h-26 flex flex-col items-center justify-center border-warning-300 border-2 rounded-3xl p-1 bg-lime-200"
+                      className="flex flex-col items-center justify-center border-warning-300 border-2 rounded-3xl p-1 bg-lime-200"
                     >
                       <p className="text-center">{ele.player_name}</p>
                       <img
-                        className="h-20 rounded-3xl object-cover"
+                        className="rounded-3xl object-cover "
                         loading="lazy"
                         src={
                           ele.player_image ? ele.player_image : player_unknown
@@ -186,7 +198,7 @@ export default function Players({ showModal, setShowModal, players }) {
                           e.target.src = player_unknown; // imagen de respaldo
                         }}
                       />
-                      <div className="">
+                      <div className="flex">
                         <Button
                           onClick={() => {
                             setOpenDetail(true);
@@ -224,127 +236,10 @@ export default function Players({ showModal, setShowModal, players }) {
                 })}
               </div>
             </div>
-          </>
-        }
-      </div> */}
-      <Fragment>
-        <Dialog
-          open={showModal}
-          handler={(e) => handleOpenModal(e)}
-          animate={{
-            mount: { scale: 1, y: 0 },
-            unmount: { scale: 0.9, y: -100 },
-          }}
-          size="xl"
-          className="bg-gradient-to-bl from-lime-200 via-white to-orange-200 z-10  rounded-3xl "
-        >
-          <DialogBody>
-            <div
-              onClick={(event) => {
-                setShowModal(false);
-                event.stopPropagation();
-              }}
-            >
-              {openDetail && (
-                <Details
-                  playerName={playerName}
-                  playerImage={playerImage}
-                  setOpenDetail={setOpenDetail}
-                  openDetail={openDetail}
-                  handleOpen={handleOpen}
-                  setShowModal={setShowModal}
-                />
-              )}
-              {
-                <>
-                  <div
-                    onClick={(event) => event.stopPropagation()}
-                    className="bg-lime-500 p-1 mt-5 rounded-2xl"
-                  >
-                    <div className="flex justify-between mx-5 mb-4">
-                      <div>{TeamsIndicator(team1)}</div>
-                      <p>{}</p>
-                      <div>{TeamsIndicator(team2)}</div>
-                    </div>
-                    <div className="p-1 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 overflow-auto rounded-xl overflow-y-scroll h-96">
-                      {!openDetail && (
-                        <button
-                          className="absolute top-0 right-0 p-2"
-                          onClick={() => setShowModal(false)}
-                        >
-                          <p className="text-2xl absolute top-0 right-0 p-2">
-                            <FaWindowClose />
-                          </p>
-                        </button>
-                      )}
-
-                      {players?.map((ele) => {
-                        const showButtonCancel = existPlayer(ele);
-                        return (
-                          <div
-                            key={ele.player_name}
-                            className="flex flex-col items-center justify-center border-warning-300 border-2 rounded-3xl p-1 bg-lime-200"
-                          >
-                            <p className="text-center">{ele.player_name}</p>
-                            <img
-                              className="rounded-3xl object-cover "
-                              loading="lazy"
-                              src={
-                                ele.player_image
-                                  ? ele.player_image
-                                  : player_unknown
-                              }
-                              alt={ele.player_name}
-                              onError={(e) => {
-                                e.target.onerror = null; // evitar un bucle infinito de errores
-                                e.target.src = player_unknown; // imagen de respaldo
-                              }}
-                            />
-                            <div className="flex">
-                              <Button
-                                onClick={() => {
-                                  setOpenDetail(true);
-                                  setPlayerName(ele.player_name);
-                                  setPlayerImage(ele.player_image);
-                                }}
-                                className="inline-block rounded bg-warning px-3 pt-1 pb-1 mt-1 text-xs font-medium uppercase leading-normal"
-                              >
-                                Detalles
-                              </Button>
-                              {!showButtonCancel ? (
-                                <Button
-                                  className="inline-block rounded ml-1 px-3 pt-1 pb-1 mt-1 text-xs font-medium uppercase leading-normal"
-                                  onClick={() => {
-                                    seleccionarEquipo(ele);
-                                  }}
-                                  color="green"
-                                >
-                                  <p className="">+</p>
-                                </Button>
-                              ) : (
-                                <Button
-                                  className="inline-block rounded ml-1 px-3 pt-1 pb-1 mt-1 text-xs font-medium uppercase leading-normal"
-                                  onClick={() => {
-                                    removePlayer(ele);
-                                  }}
-                                  color="red"
-                                >
-                                  <p className="">x</p>
-                                </Button>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </>
-              }
-            </div>
-          </DialogBody>
-          <DialogFooter className="justify-center flex-row"></DialogFooter>
-        </Dialog>
-      </Fragment>
-    </div>
+          )}
+        </DialogBody>
+        <DialogFooter className="justify-center flex-row"></DialogFooter>
+      </Dialog>
+    </Fragment>
   );
 }

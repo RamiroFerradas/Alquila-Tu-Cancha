@@ -1,8 +1,12 @@
-import React, { useEffect, lazy } from "react";
 import useFetch from "../../../../Hooks/useFetch";
 import { TEAMS_URL } from "../../../../services";
 
-export default function Teams({ leagueId, setShowModal, setPlayers }) {
+export default function Teams({
+  leagueId,
+  setShowModal,
+  setPlayers,
+  setTeamName,
+}) {
   const { data, loading } = useFetch(TEAMS_URL(leagueId));
 
   return loading ? (
@@ -22,6 +26,7 @@ export default function Teams({ leagueId, setShowModal, setPlayers }) {
             onClick={() => {
               setPlayers(players);
               setShowModal(true);
+              setTeamName(team_name);
             }}
           >
             <img

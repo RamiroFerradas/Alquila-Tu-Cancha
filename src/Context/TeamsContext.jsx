@@ -3,9 +3,9 @@ import { createContext, useMemo, useState } from "react";
 export const TeamsContext = createContext();
 
 export const TeamsProvider = ({ children }) => {
-  const [team1, setteam1] = useState({ name: "Equipo 1", players: [] });
-  const [team2, setteam2] = useState({ name: "Equipo 2", players: [] });
-
+  const [team1, setteam1] = useState({ name: "", players: [] });
+  const [team2, setteam2] = useState({ name: "", players: [] });
+  console.log();
   const addPlayer = (player, equipo) => {
     if (equipo.players.length < 5) {
       // Verificar si el equipo tiene menos de 5 jugadores
