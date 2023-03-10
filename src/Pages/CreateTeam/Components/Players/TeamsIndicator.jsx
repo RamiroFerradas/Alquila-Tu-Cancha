@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function TeamsIndicator(team) {
-  console.log(team?.name);
   return (
     <>
       <div className="flex justify-center text-center">

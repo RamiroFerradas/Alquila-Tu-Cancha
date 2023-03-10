@@ -6,7 +6,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Navmenu() {
   const [openNav, setOpenNav] = useState(false);
@@ -18,13 +18,15 @@ export default function Navmenu() {
     );
   }, []);
 
+  const { pathname } = useLocation();
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className={`p-1 font-norma ${pathname === "/create" && `text-red-800`}`}
       >
         <NavLink to={"/create"} className="flex items-center">
           Crear equipo
@@ -34,7 +36,7 @@ export default function Navmenu() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className={`p-1 font-norma ${pathname === "/teams" && `text-red-800`}`}
       >
         <NavLink to={"/teams"} className="flex items-center">
           Mis equipos
@@ -44,7 +46,7 @@ export default function Navmenu() {
   );
 
   return (
-    <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4">
+    <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4 fixed top-0 right-0 left-0">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"

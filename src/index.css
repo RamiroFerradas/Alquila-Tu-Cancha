@@ -5,3 +5,16 @@
 .swal2-container {
   z-index: 20000 !important;
 }
+::-webkit-scrollbar {
+  width: 8px; /* ancho de la scrollbar */
+  height: 8px; /* altura de la scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f2f2f2; /* color de fondo de la scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* color del thumb */
+  border-radius: 999px; /* redondear los bordes del thumb */
+}

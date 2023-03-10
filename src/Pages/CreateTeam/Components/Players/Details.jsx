@@ -18,8 +18,8 @@ export default function Details({
   playerImage,
   handleOpen,
 }) {
-  let { data } = useFetch(PLAYER_URL(playerName && playerName));
-
+  let { data, loading } = useFetch(PLAYER_URL(playerName));
+  console.log(data);
   const totalGoals = data?.reduce((acumulador, jugador) => {
     return acumulador + parseInt(jugador.player_goals);
   }, 0);
@@ -57,7 +57,7 @@ export default function Details({
                 <FaWindowClose />
               </p>
             </button>
-            {!data ? (
+            {loading ? (
               <div className="items-center flex h-96">
                 <p>Cargando...</p>
               </div>
