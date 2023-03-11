@@ -8,7 +8,12 @@ module.exports = withMT({
     "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Jost", "sans-serif"],
+        handwriting: ["Caveat", "cursive"],
+      },
+    },
   },
   plugins: [require("tw-elements/dist/plugin")],
 });

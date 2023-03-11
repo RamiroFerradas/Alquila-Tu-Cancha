@@ -46,14 +46,11 @@ export default function Players({
         text: `${
           team1Complete ? team1.name : team2Complete ? team2.name : ""
         } ${team1Complete || team2Complete ? `está completo!` : ""}`,
-        showConfirmButton: !team1Complete,
-        confirmButtonColor:
-          "bg-green-500 hover:bg-green-600 focus:ring-green-500",
-        denyButtonColor: "bg-green-500 hover:bg-green-600 focus:ring-green-500",
-        confirmButtonText: `${team1?.name}`,
-        denyButtonText: `${team2?.name}`,
-        showDenyButton: !team2Complete,
-        reverseButtons: true,
+        confirmButtonText: `${team2?.name}`,
+        denyButtonText: `${team1?.name}`,
+        showConfirmButton: !team2Complete,
+        showDenyButton: !team1Complete,
+        reverseButtons: false,
         customClass: {
           title: "text-lg font-medium text-gray-800", // Estilos para el título
           content: "text-sm text-gray-600", // Estilos para el contenido
@@ -63,9 +60,9 @@ export default function Players({
         },
       }).then((result) => {
         if (result.isConfirmed) {
-          selectPlayer(player, team1);
-        } else if (result.isDenied) {
           selectPlayer(player, team2);
+        } else if (result.isDenied) {
+          selectPlayer(player, team1);
         }
       });
     } else {
@@ -114,14 +111,16 @@ export default function Players({
           size="xl"
           className="bg-gradient-to-bl from-lime-200 via-white to-orange-200 rounded-3xl"
         >
-          <Details
-            playerName={playerName}
-            playerImage={playerImage}
-            setOpenDetail={setOpenDetail}
-            openDetail={openDetail}
-            setShowModal={setShowModal}
-            selectTeam={selectTeam}
-          />
+          {openDetail && (
+            <Details
+              playerName={playerName}
+              playerImage={playerImage}
+              setOpenDetail={setOpenDetail}
+              openDetail={openDetail}
+              setShowModal={setShowModal}
+              selectTeam={selectTeam}
+            />
+          )}
           <DialogBody>
             <p className="text-center p-0 m-0 right-0 absolute left-0 top-1 text-xl font-bold ">
               {teamName}

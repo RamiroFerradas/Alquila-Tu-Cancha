@@ -21,17 +21,16 @@ export default function Details({
 }) {
   let { data, loading } = useFetch(PLAYER_URL(playerName));
 
-  const totalGoals = data?.reduce((acc, jugador) => {
-    return acc + parseInt(jugador.player_goals);
-  }, 0);
-
-  const ratings = data.map((player) => {
+  console.log(data);
+  const ratings = data?.map((player) => {
     const rating = parseInt(player.player_rating);
-    return isNaN(rating) ? 0 : rating; // si el valor no es un número, devuelve 0
+    return isNaN(rating) ? 0 : rating;
   });
-
+  console.log(ratings);
   const averageRating =
-    ratings.reduce((total, rating) => total + rating, 0) / ratings.length;
+    ratings !== undefined
+      ? ratings?.reduce((total, rating) => total + rating, 0) / ratings?.length
+      : 0;
 
   console.log(averageRating);
 
@@ -104,7 +103,7 @@ export default function Details({
                       {data?.[0].player_birthdate}
                       <p className="text-md">
                         <span className="font-semibold mr-2">Posicion</span>
-                        {data[0].player_type.slice()}
+                        {data?.[0].player_type.slice()}
                       </p>
                       {/* {averageRating !== 0 && (
                         <p className="text-md">
