@@ -20,6 +20,8 @@ export default function Leagues({
         Primero selecciona un pais para elegir una liga...
       </p>
     </div>
+  ) : loading ? (
+    <Loader />
   ) : data ? (
     <div className="p-5 flex flex-col h-screen">
       <div className="flex my-4 py-2 items-center justify-center">
@@ -27,7 +29,7 @@ export default function Leagues({
       </div>
       <SearchBar setLeagueFiltered={setLeagueFiltered} data={data} />
 
-      <div className="flex-grow overflow-y-auto p-3 grid grid-cols-2 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto gap-6">
+      <div className="flex-grow overflow-y-auto p-3 grid grid-cols-2 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto">
         {leagueFiltered?.map(
           ({ league_name, league_logo, country_logo, league_id }) => (
             <div

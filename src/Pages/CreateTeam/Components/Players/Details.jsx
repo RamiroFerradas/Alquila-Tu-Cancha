@@ -10,6 +10,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import Loader from "../../../../Components/Loader/Loader";
 
 export default function Details({
   playerName,
@@ -17,20 +18,18 @@ export default function Details({
   openDetail,
   playerImage,
   handleOpen,
+  selectTeam,
 }) {
   let { data, loading } = useFetch(PLAYER_URL(playerName));
-  console.log(data);
-  const totalGoals = data?.reduce((acumulador, jugador) => {
-    return acumulador + parseInt(jugador.player_goals);
+
+  const totalGoals = data?.reduce((acc, jugador) => {
+    return acc + parseInt(jugador.player_goals);
   }, 0);
 
   const teamNamesSet = new Set(data?.map((ele) => ele.team_name));
 
   return (
     <Fragment>
-      {/* <Button onClick={handleOpen} variant="gradient">
-        Open Dialog
-      </Button> */}
       <Dialog
         open={openDetail}
         handler={(e) => handleOpen(e)}
@@ -40,11 +39,11 @@ export default function Details({
         }}
         className="bg-gradient-to-bl from-lime-200 via-white to-orange-200  overflow-auto rounded-3xl "
       >
-        {/* <DialogHeader>{data?.[0].player_name}</DialogHeader> */}
         <DialogBody>
           <div
             key={data?.[0].player_name}
-            className="flex flex-col items-center justify-center  border-warning-300 border-4 rounded-3xl"
+            style={{ height: "25rem" }}
+            className="flex flex-col items-center justify-center  border-warning-300 border-4 rounded-3xl overflow-hidden"
           >
             <button
               className="absolute top-0 right-0 p-2"
@@ -58,9 +57,7 @@ export default function Details({
               </p>
             </button>
             {loading ? (
-              <div className="items-center flex h-96">
-                <p>Cargando...</p>
-              </div>
+              <Loader />
             ) : (
               <>
                 <img
@@ -94,10 +91,10 @@ export default function Details({
                     </div>
                   </div>
                   <div className="overflow-auto h-40">
-                    <p className="text-md font-semibold">Equipos:</p>
+                    <p className="text-md font-semibold">Participaciones:</p>
                     <ul>
-                      {[...teamNamesSet].map((teamName) => (
-                        <li>{`- ${teamName}`}</li>
+                      {[...teamNamesSet].map((teamName, index) => (
+                        <li key={index}>{`- ${teamName}`}</li>
                       ))}
                     </ul>
                   </div>
@@ -110,7 +107,7 @@ export default function Details({
           <Button
             variant="gradient"
             color="green"
-            onClick={handleOpen}
+            onClick={(e) => selectTeam(e, data?.[0])}
             className={!data && `hidden`}
           >
             <span>Agregar a equipo</span>

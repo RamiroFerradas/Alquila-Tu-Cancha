@@ -5,13 +5,16 @@ export default function SearchBar({
   data,
   setLeagueFiltered,
   setTeamFiltered,
+  setPlayerFiltered,
 }) {
   const [input, setInput] = useState("");
   const setFilter = setCountreiesFiltered
     ? setCountreiesFiltered
     : setLeagueFiltered
     ? setLeagueFiltered
-    : setTeamFiltered;
+    : setTeamFiltered
+    ? setTeamFiltered
+    : setPlayerFiltered;
 
   const handleFilter = useCallback(
     (input) => {
@@ -19,7 +22,9 @@ export default function SearchBar({
         ? "country_name"
         : setLeagueFiltered
         ? "league_name"
-        : "team_name";
+        : setTeamFiltered
+        ? "team_name"
+        : "player_name";
 
       const filter = data?.filter((info) =>
         info[nameFilter].toLowerCase().includes(input.toLowerCase())
@@ -38,7 +43,7 @@ export default function SearchBar({
     setInput(name);
   };
   return (
-    <div className="flex items-center justify-center p-2 ">
+    <div className="flex items-center justify-center p-2">
       <div className="flex border border-purple-200 rounded-xl w-8/12">
         <input
           type="text"

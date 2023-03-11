@@ -1,4 +1,4 @@
-import { useCallback, useState, Fragment, useEffect } from "react";
+import { useCallback, useState, Fragment, useEffect, useMemo } from "react";
 import player_unknown from "../../Assets/Player/profile_player.png";
 import { FaWindowClose } from "react-icons/fa";
 import Details from "./Details";
@@ -13,6 +13,8 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import useFetch from "../../../../Hooks/useFetch";
+import Loader from "../../../../Components/Loader/Loader";
+import SearchBar from "../Countries/SearchBar";
 
 export default function Players({
   showModal,
@@ -33,14 +35,15 @@ export default function Players({
     setShowModal(!showModal);
   };
   const handleOpen = (e) => {
-    console.log(e);
     setOpenDetail(!openDetail);
-    // e?.stopPropagation();
+    e?.stopPropagation();
+    console.log(e);
   };
 
   const team1Complete = team1.players.length === 5;
   const team2Complete = team2.players.length === 5;
-  const seleccionarEquipo = async (e, player) => {
+
+  const selectTeam = async (e, player) => {
     e.stopPropagation();
 
     if (!team1Complete || !team2Complete) {
@@ -95,20 +98,26 @@ export default function Players({
     [team1.players, team2.players]
   );
 
+  const [playerFiltered, setPlayerFiltered] = useState([]);
+
+  useEffect(() => {
+    !playerFiltered.length && setPlayerFiltered(players);
+  }, [players, playerFiltered]);
+
   return (
     <Fragment>
-      <div>
+      <div className="">
         <Dialog
           open={showModal}
           outsidePointerDown
           ancestorScroll
-          // onClick={(e) => handleOpenModal(e)}
+          onClick={(e) => handleOpenModal(e)}
           animate={{
             mount: { scale: 1, y: 0 },
             unmount: { scale: 0.9, y: -100 },
           }}
           size="xl"
-          className="bg-gradient-to-bl from-lime-200 via-white to-orange-200 z-10  rounded-3xl "
+          className="bg-gradient-to-bl from-lime-200 via-white to-orange-200 z-10 rounded-3xl"
         >
           <DialogBody>
             {openDetail && (
@@ -119,6 +128,7 @@ export default function Players({
                 openDetail={openDetail}
                 handleOpen={handleOpen}
                 setShowModal={setShowModal}
+                selectTeam={selectTeam}
               />
             )}
             <p className="text-center p-0 m-0 right-0 absolute left-0 top-1 text-xl font-bold ">
@@ -126,22 +136,24 @@ export default function Players({
             </p>
 
             {!players && loading ? (
-              <div className="h-96 flex justify-center items-center">
-                <p>Cargando...</p>
-              </div>
+              <Loader />
             ) : (
               <div
                 onClick={(event) => event.stopPropagation()}
-                className="bg-lime-500 p-1 mt-5 rounded-2xl"
+                className="bg-lime-500 p-1 mt-5 rounded-2xl overflow-auto"
+                style={{ height: "80vh" }}
               >
-                <div className="flex justify-between mx-5">
-                  <div>{TeamsIndicator(team1)}</div>
-                  <div>
-                    <input type="search" />
+                <TeamsIndicator />
+                <div className="flex flex-col justify-center items-center relative">
+                  <div className="md:w-1/2 w-full block md:absolute bottom-2">
+                    <SearchBar
+                      setPlayerFiltered={setPlayerFiltered}
+                      data={players}
+                    />
                   </div>
-                  <div>{TeamsIndicator(team2)}</div>
                 </div>
-                <div className="p-1 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 overflow-auto rounded-xl overflow-y-scroll h-96">
+
+                <div className="p-1 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 rounded-xl overflow-auto">
                   {!openDetail && (
                     <button
                       className="absolute top-0 right-0"
@@ -156,24 +168,42 @@ export default function Players({
                     </button>
                   )}
 
-                  {players?.map((ele) => {
+                  {playerFiltered?.map((ele) => {
                     const showButtonCancel = existPlayer(ele);
+                    const findTeam1 = team1.players.find(
+                      (p) => p.player_key === ele.player_key
+                    );
+                    const findTeam2 = team2.players.find(
+                      (p) => p.player_key === ele.player_key
+                    );
+
                     return (
                       <div
                         key={ele.player_key}
-                        className="flex flex-col items-center justify-center border-warning-300 border-2 rounded-3xl p-1 bg-lime-200"
+                        className="flex flex-col items-center justify-center border-warning-300 border-2 rounded-3xl p-1 bg-lime-200 h-48 relative"
                       >
-                        <p className="text-center">{ele.player_name}</p>
+                        {findTeam1 || findTeam2 ? (
+                          findTeam1 ? (
+                            <div className="absolute top-1 right-1 bg-red-500 rounded-full text-white w-4 h-4 lg:w-6 lg:h-6 flex items-center justify-center text-center">
+                              <span>1</span>
+                            </div>
+                          ) : (
+                            <div className="absolute top-1 right-1 bg-blue-700 rounded-full text-white w-4 h-4 lg:w-6 lg:h-6 flex items-center justify-center">
+                              <span>2</span>
+                            </div>
+                          )
+                        ) : null}
+                        <p className="text-center text-sm">{ele.player_name}</p>
                         <img
-                          className="rounded-3xl object-cover "
+                          className="rounded-3xl object-cover h-28"
                           // loading="lazy"
                           src={
                             ele.player_image ? ele.player_image : player_unknown
                           }
                           alt={ele.player_name}
                           onError={(e) => {
-                            e.target.onerror = null; // evitar un bucle infinito de errores
-                            e.target.src = player_unknown; // imagen de respaldo
+                            e.target.onerror = null;
+                            e.target.src = player_unknown;
                           }}
                         />
                         <div className="flex">
@@ -191,7 +221,7 @@ export default function Players({
                             <Button
                               className="inline-block rounded ml-1 px-3 pt-1 pb-1 mt-1 text-xs font-medium uppercase leading-normal"
                               onClick={(e) => {
-                                seleccionarEquipo(e, ele);
+                                selectTeam(e, ele);
                               }}
                               color="green"
                             >
