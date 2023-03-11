@@ -4,13 +4,12 @@ import useFetch from "../../../../Hooks/useFetch";
 import { TEAMS_URL } from "../../../../services";
 import unknow_team from "../../Assets/Player/unknown_team.jpg";
 import SearchBar from "../Countries/SearchBar";
+import Players from "../Players/Players";
 
-export default function Teams({
-  leagueId,
-  setShowModal,
-  setPlayers,
-  setTeamName,
-}) {
+export default function Teams({ leagueId, setPlayers, players }) {
+  const [showModal, setShowModal] = useState(false);
+  const [teamName, setTeamName] = useState([]);
+
   let { data, loading } = useFetch(TEAMS_URL(leagueId));
   if (!leagueId) data = [];
   const [teamFiltered, setTeamFiltered] = useState(data);
@@ -25,6 +24,13 @@ export default function Teams({
     <Loader />
   ) : data ? (
     <div className="p-5 flex flex-col h-screen">
+      <Players
+        showModal={showModal}
+        setShowModal={setShowModal}
+        players={players}
+        teamName={teamName}
+        setPlayers={setPlayers}
+      />
       <div className="flex gap-2 items-center justify-center mt-14">
         <p className="text-md ">Equipos</p>
       </div>

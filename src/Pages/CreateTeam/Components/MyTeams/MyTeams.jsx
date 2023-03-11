@@ -30,14 +30,14 @@ export default function MyTeams({ setContinueButton }) {
 
   const [viewError, setviewError] = useState(false);
   return (
-    <div className="h-full flex flex-col md:justify-center mt-10 md:mt-0 items-center xs:gap-10">
-      <div className="md:grid md:grid-cols-2 md:gap-20 md:p-10 gap-5 md:h-3/4  grid h-96 ">
+    <div className="h-screen flex flex-col justify-center md:mt-0 items-center ">
+      <div className="md:grid md:grid-cols-2 md:gap-20 md:p-10 gap-5 md:h-3/4  grid mb-0 mt-0">
         <div
-          className={`flex justify-center items-center  border-4 ${
+          className={`flex justify-center items-center h-3/4 md:h-1/2 border-4 ${
             names.team1.error && viewError
               ? `border-red-500`
               : `border-indigo-300`
-          } rounded-2xl p-8`}
+          } rounded-2xl p-8  md:mt-20`}
         >
           <div className="md:w-3/4 overflow-hidde">
             <Input
@@ -53,13 +53,13 @@ export default function MyTeams({ setContinueButton }) {
           </div>
         </div>
         <div
-          className={`flex justify-center items-center  border-4 ${
+          className={`flex justify-center items-center h-3/4 md:h-1/2 border-4 ${
             names.team2.error && viewError
               ? `border-red-500`
               : `border-indigo-300`
-          } rounded-2xl p-8`}
+          } rounded-2xl p-8  md:mt-20`}
         >
-          <div className="md:w-3/4 overflow-hidde ">
+          <div className="md:w-3/4 ">
             <Input
               id="team2"
               name="team2"

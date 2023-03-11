@@ -7,10 +7,11 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useTeams } from "../../Hooks/useTeams";
 
 export default function Navmenu() {
   const [openNav, setOpenNav] = useState(false);
-
+  const { team1, team2 } = useTeams();
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -19,6 +20,17 @@ export default function Navmenu() {
   }, []);
 
   const { pathname } = useLocation();
+
+  const DisabledNavLink = ({ to, disabled, ...props }) => {
+    if (disabled) {
+      return (
+        <span {...props} className="text-gray-400 cursor-not-allowed">
+          {props.children}
+        </span>
+      );
+    }
+    return <NavLink {...props} to={to} />;
+  };
 
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -38,9 +50,13 @@ export default function Navmenu() {
         color="blue-gray"
         className={`p-1 font-norma ${pathname === "/teams" && `text-red-800`}`}
       >
-        <NavLink to={"/teams"} className="flex items-center">
+        <DisabledNavLink
+          disabled={!team1.name || !team2.name}
+          to={"/teams"}
+          className="flex items-center"
+        >
           Mis equipos
-        </NavLink>
+        </DisabledNavLink>
       </Typography>
     </ul>
   );

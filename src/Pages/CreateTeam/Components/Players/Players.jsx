@@ -29,23 +29,16 @@ export default function Players({
   const { team1, team2, setteam1, setteam2, selectPlayer, removePlayer } =
     useTeams();
   const { loading } = useFetch();
+
   const handleOpenModal = (e) => {
-    console.log(e);
-    // e.stopPropagation();
+    e.stopPropagation();
     setShowModal(!showModal);
-  };
-  const handleOpen = (e) => {
-    setOpenDetail(!openDetail);
-    e?.stopPropagation();
-    console.log(e);
   };
 
   const team1Complete = team1.players.length === 5;
   const team2Complete = team2.players.length === 5;
 
   const selectTeam = async (e, player) => {
-    e.stopPropagation();
-
     if (!team1Complete || !team2Complete) {
       Swal.fire({
         title: "Agregar jugador a:",
@@ -80,6 +73,8 @@ export default function Players({
         title: "Ambos equipos estan llenos",
         icon: "error",
         text: `No puede agregar mas de 5 jugadores por equipo`,
+      }).then((result) => {
+        result.isConfirmed && e.stopPropagation();
       });
     }
   };
@@ -111,26 +106,23 @@ export default function Players({
           open={showModal}
           outsidePointerDown
           ancestorScroll
-          onClick={(e) => handleOpenModal(e)}
+          handler={(e) => handleOpenModal(e)}
           animate={{
             mount: { scale: 1, y: 0 },
             unmount: { scale: 0.9, y: -100 },
           }}
           size="xl"
-          className="bg-gradient-to-bl from-lime-200 via-white to-orange-200 z-10 rounded-3xl"
+          className="bg-gradient-to-bl from-lime-200 via-white to-orange-200 rounded-3xl"
         >
+          <Details
+            playerName={playerName}
+            playerImage={playerImage}
+            setOpenDetail={setOpenDetail}
+            openDetail={openDetail}
+            setShowModal={setShowModal}
+            selectTeam={selectTeam}
+          />
           <DialogBody>
-            {openDetail && (
-              <Details
-                playerName={playerName}
-                playerImage={playerImage}
-                setOpenDetail={setOpenDetail}
-                openDetail={openDetail}
-                handleOpen={handleOpen}
-                setShowModal={setShowModal}
-                selectTeam={selectTeam}
-              />
-            )}
             <p className="text-center p-0 m-0 right-0 absolute left-0 top-1 text-xl font-bold ">
               {teamName}
             </p>
@@ -184,11 +176,11 @@ export default function Players({
                       >
                         {findTeam1 || findTeam2 ? (
                           findTeam1 ? (
-                            <div className="absolute top-1 right-1 bg-red-500 rounded-full text-white w-4 h-4 lg:w-6 lg:h-6 flex items-center justify-center text-center">
+                            <div className="absolute top-1 right-1 bg-red-500 rounded-full text-white w-4 h-4  flex items-center justify-center text-center">
                               <span>1</span>
                             </div>
                           ) : (
-                            <div className="absolute top-1 right-1 bg-blue-700 rounded-full text-white w-4 h-4 lg:w-6 lg:h-6 flex items-center justify-center">
+                            <div className="absolute top-1 right-1 bg-blue-700 rounded-full text-white w-4 h-4 flex items-center justify-center">
                               <span>2</span>
                             </div>
                           )
@@ -208,7 +200,7 @@ export default function Players({
                         />
                         <div className="flex">
                           <Button
-                            onClick={() => {
+                            onClick={(e) => {
                               setOpenDetail(true);
                               setPlayerName(ele.player_name);
                               setPlayerImage(ele.player_image);

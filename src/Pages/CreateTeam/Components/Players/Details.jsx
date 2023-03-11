@@ -17,7 +17,6 @@ export default function Details({
   setOpenDetail,
   openDetail,
   playerImage,
-  handleOpen,
   selectTeam,
 }) {
   let { data, loading } = useFetch(PLAYER_URL(playerName));
@@ -32,12 +31,15 @@ export default function Details({
     <Fragment>
       <Dialog
         open={openDetail}
-        handler={(e) => handleOpen(e)}
+        handler={(e) => {
+          e.stopPropagation();
+          setOpenDetail(!openDetail);
+        }}
         animate={{
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0.9, y: -100 },
         }}
-        className="bg-gradient-to-bl from-lime-200 via-white to-orange-200  overflow-auto rounded-3xl "
+        className="bg-gradient-to-bl from-lime-200 via-white to-orange-200  overflow-auto rounded-3xl"
       >
         <DialogBody>
           <div
@@ -48,7 +50,7 @@ export default function Details({
             <button
               className="absolute top-0 right-0 p-2"
               onClick={(e) => {
-                e.stopPropagation();
+                e.stopPropagation(e);
                 setOpenDetail(false);
               }}
             >
@@ -107,7 +109,10 @@ export default function Details({
           <Button
             variant="gradient"
             color="green"
-            onClick={(e) => selectTeam(e, data?.[0])}
+            onClick={(e) => {
+              e.stopPropagation();
+              selectTeam(e, data?.[0]);
+            }}
             className={!data && `hidden`}
           >
             <span>Agregar a equipo</span>

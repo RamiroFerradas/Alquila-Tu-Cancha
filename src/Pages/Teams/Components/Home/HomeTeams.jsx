@@ -1,5 +1,5 @@
 import { useTeams } from "../../../../Hooks/useTeams";
-import Players from "../Player/Players";
+import Players from "../Players/Players";
 import { AiOutlineEdit } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { textCapitalize } from "../../../../Utils/TextCapitalize";
@@ -39,20 +39,28 @@ export default function HomeTeams() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-20 grid-container w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 grid-container">
         {teams.map((ele) => (
           <div
             key={ele.name}
-            className="border-4 rounded-2xl border-red-500 h-96 w-full p-5"
+            className={`border-4 rounded-2xl ${
+              ele.name === team1.name ? `border-red-500` : `border-blue-700`
+            } h-96 w-auto md:w-96 p-5 `}
           >
-            <div className="flex justify-center relative items-center">
+            <div className="flex justify-between relative items-center pb-3">
+              {ele.name === team1.name ? (
+                <div className="absolut top-1 right-1 bg-red-500 rounded-full text-dark w-6 h-6  text-center">
+                  <span>1</span>
+                </div>
+              ) : (
+                <div className="absolut top-1 right-1 bg-blue-700 rounded-full text-dark w-6 h-6 flex items-center justify-center">
+                  <span>2</span>
+                </div>
+              )}
               <p className="text-center text-xl capitalize">
                 {textCapitalize(ele.name)}
               </p>
-              <button
-                className="absolute right-5"
-                onClick={() => editTeamName(ele)}
-              >
+              <button className="" onClick={() => editTeamName(ele)}>
                 <p className="text-xl">
                   <AiOutlineEdit />
                 </p>
