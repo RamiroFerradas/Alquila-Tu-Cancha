@@ -4,6 +4,7 @@ import Leagues from "../Leagues/Leagues";
 import Teams from "../Teams/Teams";
 import MyTeams from "../MyTeams/MyTeams";
 import { useTeams } from "../../../../Hooks/useTeams";
+import pasto from "../../Assets/Backgrounds/pasto.jpeg";
 
 export default function HomeCreateTeam() {
   const [countryId, setCountryId] = useState("");
@@ -16,7 +17,9 @@ export default function HomeCreateTeam() {
   const teamsRef = useRef();
 
   return (
-    <div className="bg-gradient-to-r from-lime-50 to-lime-200 px-6 md:p-0">
+    <div
+      className={`bg-[url("../../Assets/Backgrounds/pasto.jpeg")] px-6 md:p-0`}
+    >
       {(!continueButton && !team1.name) || (!continueButton && !team2.name) ? (
         <div className="h-4/5 overflow-hidden">
           <MyTeams setContinueButton={setContinueButton} />
