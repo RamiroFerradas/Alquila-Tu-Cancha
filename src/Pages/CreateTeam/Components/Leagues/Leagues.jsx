@@ -23,21 +23,22 @@ export default function Leagues({
   ) : loading ? (
     <Loader />
   ) : data ? (
-    <div className="p-5 flex flex-col h-screen">
-      <div className="flex my-4 py-2 items-center justify-center">
+    <div className=" p-2 flex flex-col h-screen">
+      <div className="flex gap-2 items-center justify-center mt-16">
         <p className="text-md ">Ligas</p>
       </div>
       <SearchBar setLeagueFiltered={setLeagueFiltered} data={data} />
 
-      <div className="flex-grow overflow-y-auto p-3 grid grid-cols-2 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto">
+      <div className="flex-grow overflow-y-auto px-3 grid grid-cols-2 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto">
         {leagueFiltered?.map(
           ({ league_name, league_logo, country_logo, league_id }) => (
             <div
               className="cursor-pointer mt-8 flex flex-col items-center"
               onClick={() => {
                 setLeagueId(league_id);
-
-                scrollToSeccion(teamsRef);
+                setTimeout(() => {
+                  scrollToSeccion(teamsRef);
+                }, 200);
               }}
             >
               <img

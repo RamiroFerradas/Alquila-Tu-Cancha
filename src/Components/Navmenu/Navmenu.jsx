@@ -41,7 +41,11 @@ export default function Navmenu() {
         className={`p-1 font-norma ${pathname === "/create" && `text-red-800`}`}
       >
         <NavLink to={"/create"} className="flex items-center">
-          Crear equipo
+          {`${
+            !team1.players || !team2.players
+              ? `Crear equipo`
+              : `Agregar Jugadores`
+          }`}
         </NavLink>
       </Typography>
       <Typography
@@ -73,9 +77,16 @@ export default function Navmenu() {
           <span>Alquila tu cancha</span>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
-        <Button variant="gradient" size="sm" className="hidden lg:inline-block">
-          <span>Nuevo partido</span>
-        </Button>
+        <DisabledNavLink to={"match"} disabled={!team1.name || !team2.name}>
+          <Button
+            disabled={!team1.name || !team2.name}
+            variant="gradient"
+            size="sm"
+            className="hidden lg:inline-block"
+          >
+            <span>Nuevo partido</span>
+          </Button>
+        </DisabledNavLink>
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -117,9 +128,17 @@ export default function Navmenu() {
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
-            <span>Nuevo partido</span>
-          </Button>
+          <DisabledNavLink to={"/match"}>
+            <Button
+              variant="gradient"
+              size="sm"
+              fullWidth
+              className="mb-2"
+              disabled={!team1.name || !team2.name}
+            >
+              <span>Nuevo partido</span>
+            </Button>
+          </DisabledNavLink>
         </div>
       </MobileNav>
     </Navbar>

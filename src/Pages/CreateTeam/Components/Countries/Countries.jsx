@@ -11,14 +11,14 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
   const [countreiesFiltered, setCountreiesFiltered] = useState([]);
 
   return (
-    <div className="p-5 flex flex-col h-screen">
-      <div className="flex gap-2 items-center justify-center mt-14">
+    <div className="p-2 flex flex-col h-screen">
+      <div className="flex gap-2 items-center justify-center mt-16">
         <p className="text-md">Paises</p>
       </div>
 
       <SearchBar setCountreiesFiltered={setCountreiesFiltered} data={data} />
 
-      <div className="flex-grow overflow-y-auto p-3 grid grid-cols-3 gap-4 flex-col md:h-screen h-auto">
+      <div className="flex-grow overflow-y-auto px-3 grid grid-cols-3 gap-4 flex-col md:h-screen h-auto">
         {countreiesFiltered?.map(
           ({ country_name, country_logo, country_id }) => (
             <div
@@ -26,8 +26,9 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
               onClick={() => {
                 setCountryId(country_id);
                 setLeagueId("");
-
-                scrollToSeccion(leaguesRef);
+                setTimeout(() => {
+                  scrollToSeccion(leaguesRef);
+                }, 200);
               }}
               className="cursor-pointer mt-8 flex flex-col items-center"
             >

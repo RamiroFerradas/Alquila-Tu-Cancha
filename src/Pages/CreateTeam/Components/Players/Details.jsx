@@ -25,6 +25,16 @@ export default function Details({
     return acc + parseInt(jugador.player_goals);
   }, 0);
 
+  const ratings = data.map((player) => {
+    const rating = parseInt(player.player_rating);
+    return isNaN(rating) ? 0 : rating; // si el valor no es un número, devuelve 0
+  });
+
+  const averageRating =
+    ratings.reduce((total, rating) => total + rating, 0) / ratings.length;
+
+  console.log(averageRating);
+
   const teamNamesSet = new Set(data?.map((ele) => ele.team_name));
 
   return (
@@ -61,16 +71,24 @@ export default function Details({
             {loading ? (
               <Loader />
             ) : (
-              <>
-                <img
-                  className=" rounded-3xl object-cover mb-4 h-48 pt-1"
-                  src={playerImage}
-                  alt={data?.[0].player_name}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = player_unknown;
-                  }}
-                />
+              <div className="flex flex-col items-center relative">
+                <div className="absolute left-5 top-4 text-lg flex">
+                  <p>⭐</p>
+                  <p className="text-2xl font-bold ">
+                    {Math.ceil(averageRating * 10)}
+                  </p>
+                </div>
+                <div>
+                  <img
+                    className=" rounded-3xl object-cover mb-4 h-48 pt-1"
+                    src={playerImage}
+                    alt={data?.[0].player_name}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = player_unknown;
+                    }}
+                  />
+                </div>
                 <p className="text-2xl font-bold mb-2">
                   {data?.[0].player_name}
                 </p>
@@ -85,11 +103,15 @@ export default function Details({
                       <span className="font-semibold mr-2">Nacimiento:</span>
                       {data?.[0].player_birthdate}
                       <p className="text-md">
-                        <span className="font-semibold mr-2">
-                          Goles totales:
-                        </span>
-                        {totalGoals}
+                        <span className="font-semibold mr-2">Posicion</span>
+                        {data[0].player_type.slice()}
                       </p>
+                      {/* {averageRating !== 0 && (
+                        <p className="text-md">
+                          <span className="font-semibold mr-2">Puntuacion</span>
+                          {averageRating * 10}
+                        </p>
+                      )} */}
                     </div>
                   </div>
                   <div className="overflow-auto h-40">
@@ -101,7 +123,7 @@ export default function Details({
                     </ul>
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </DialogBody>

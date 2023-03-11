@@ -12,7 +12,7 @@ export default function Teams({ leagueId, setPlayers, players }) {
 
   let { data, loading } = useFetch(TEAMS_URL(leagueId));
   if (!leagueId) data = [];
-  const [teamFiltered, setTeamFiltered] = useState(data);
+  const [teamFiltered, setTeamFiltered] = useState([]);
 
   return !leagueId ? (
     <div className="flex justify-center items-center h-screen">
@@ -23,7 +23,7 @@ export default function Teams({ leagueId, setPlayers, players }) {
   ) : loading ? (
     <Loader />
   ) : data ? (
-    <div className="p-5 flex flex-col h-screen">
+    <div className="flex flex-col h-screen p-2">
       <Players
         showModal={showModal}
         setShowModal={setShowModal}
@@ -31,12 +31,12 @@ export default function Teams({ leagueId, setPlayers, players }) {
         teamName={teamName}
         setPlayers={setPlayers}
       />
-      <div className="flex gap-2 items-center justify-center mt-14">
+      <div className="flex gap-2 items-center justify-center mt-16">
         <p className="text-md ">Equipos</p>
       </div>
       <SearchBar setTeamFiltered={setTeamFiltered} data={data} />
 
-      <div className="flex-grow overflow-y-auto p-3 grid grid-cols-2 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto">
+      <div className="flex-grow overflow-y-auto px-3 grid grid-cols-3 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto">
         {teamFiltered?.map(({ team_name, team_badge, players }, index) => (
           <div
             key={index}

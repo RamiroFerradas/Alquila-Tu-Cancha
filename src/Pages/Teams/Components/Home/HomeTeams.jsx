@@ -39,13 +39,13 @@ export default function HomeTeams() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 grid-container">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 grid-container mt-5">
         {teams.map((ele) => (
           <div
             key={ele.name}
             className={`border-4 rounded-2xl ${
               ele.name === team1.name ? `border-red-500` : `border-blue-700`
-            } h-96 w-auto md:w-96 p-5 `}
+            } h-96 w-auto md:w-96 p-4 `}
           >
             <div className="flex justify-between relative items-center pb-3">
               {ele.name === team1.name ? (

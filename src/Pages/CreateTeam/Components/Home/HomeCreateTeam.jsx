@@ -31,7 +31,10 @@ export default function HomeCreateTeam() {
             />
           </section>
 
-          <section ref={leaguesRef}>
+          <section
+            ref={leaguesRef}
+            className={`${!countryId && `hidden`} md:block`}
+          >
             <Leagues
               leaguesRef={leaguesRef}
               setCountryId={setCountryId}
@@ -41,7 +44,10 @@ export default function HomeCreateTeam() {
             />
           </section>
 
-          <section ref={teamsRef}>
+          <section
+            ref={teamsRef}
+            className={`${!leagueId && `hidden`} md:block`}
+          >
             <Teams
               teamsRef={teamsRef}
               setLeagueId={setLeagueId}
