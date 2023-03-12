@@ -8,7 +8,7 @@ import player_unknown from "../../../CreateTeam/Assets/Player/profile_player.png
 export default function Players({ players }) {
   const { removePlayer } = useTeams();
   const { pathname } = useLocation();
-  console.log(players);
+
   return (
     <div>
       {players.map(
@@ -23,10 +23,10 @@ export default function Players({ players }) {
           },
           index
         ) => (
-          <div className="flex">
+          <div className="flex" key={index}>
             <div
               key={player_id}
-              className="flex gap-3 border-4 border-red-200 rounded-xl p-2 overflow-hidden h-12 w-80 items-center mb-2 relative justify-around"
+              className="flex gap-3 border-4 border-red-200 rounded-xl p-2 overflow-hidden h-12 w-96 items-center mb-2 relative justify-around text-white"
             >
               <span className="inline-block rounded px-1 pt-1 pb-1 text-xs font-medium uppercase leading-normal">
                 {player_type.slice(0, 3)}
@@ -40,11 +40,11 @@ export default function Players({ players }) {
                   e.target.src = player_unknown;
                 }}
               />
-              <span className=" text-center text-black text-lg font-bold flex-1 truncate">
+              <span className=" text-center text-blac text-lg font-bold flex-1 truncate">
                 {player_name}
               </span>
 
-              {pathname === "teams" ? (
+              {pathname === "/teams" ? (
                 <Button
                   className="inline-block rounded px-3 pt-1 pb-1 text-xs font-medium uppercase leading-normal "
                   onClick={() => {
@@ -55,15 +55,9 @@ export default function Players({ players }) {
                   <p className="">x</p>
                 </Button>
               ) : (
-                <>
-                  {
-                    <span>
-                      {player_rating
-                        ? Math.floor(player_rating * 10)
-                        : Math.floor(Math.random() * 90 + 10)}
-                    </span>
-                  }
-                </>
+                <p className="inline-block rounded px-3 pt-1 pb-1 text-xs font-medium uppercase leading-normal ">
+                  {player_rating ? Math.floor(player_rating * 10) : "-"}
+                </p>
               )}
             </div>
           </div>

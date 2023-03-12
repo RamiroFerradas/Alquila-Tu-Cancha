@@ -67,7 +67,7 @@ export default function Navmenu() {
   );
 
   return (
-    <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-2 fixed top-0 right-0 left-0 z-10">
+    <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-2 fixed top-0 right-0 left-0 z-30">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"

@@ -49,7 +49,7 @@ export default function HomeTeams() {
             key={ele.name}
             className={`border-4 rounded-2xl ${
               ele.name === team1.name ? `border-red-500` : `border-blue-700`
-            } h-96 w-auto md:w-96 p-4 bg-gray-900 bg-opacity-80 backdrop-blur-xs`}
+            } h-96 w-auto md:w-[32rem] p-4 bg-gray-900 bg-opacity-80 backdrop-blur-xs`}
           >
             <div className="flex justify-between relative items-center pb-3 text-white">
               {ele.name === team1.name ? (
