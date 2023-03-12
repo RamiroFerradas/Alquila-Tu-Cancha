@@ -48,16 +48,19 @@ export default function Details({
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0.9, y: -100 },
         }}
-        className="bg-gradient-to-bl from-lime-200 via-white to-orange-200  overflow-auto rounded-3xl"
+        className=" overflow-auto rounded-3xl bg-gray-900 bg-opacity-90 backdrop-blur-xs"
       >
         <DialogBody>
           <div
             key={data?.[0].player_name}
-            style={{ height: "25rem" }}
-            className="flex flex-col items-center justify-center  border-warning-300 border-4 rounded-3xl overflow-hidden"
+            className="flex flex-col items-center justify-center  border-warning-300 border-4 rounded-3xl overflow-hidden h-[25rem] text-white"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(34, 34, 35, 0.797), rgba(167, 167, 167, 0.1))",
+            }}
           >
             <button
-              className="absolute top-0 right-0 p-2"
+              className="absolute top-0 right-0 p-2 "
               onClick={(e) => {
                 e.stopPropagation(e);
                 setOpenDetail(false);

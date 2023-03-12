@@ -7,16 +7,26 @@ export default function TeamsIndicator() {
   const teams = [team1, team2];
   return (
     <div className="flex md:justify-between justify-around items-center lg:px-10 ">
-      {teams.map((team) => (
-        <div>
-          <div className="flex justify-center text-center">
+      {teams.map((team, index) => (
+        <div key={index}>
+          <div className="flex justify-center text-center items-center ">
+            {team.name === team1.name && (
+              <div className="mr-2 bg-red-500 rounded-full text-white w-4 h-4  flex items-center justify-center text-center">
+                <span>1</span>
+              </div>
+            )}
             <span
               className={`${
-                team.name === team1.name ? `text-red-400` : `text-blue-700`
-              } text-center text-xs md:text-lg`}
+                team.name === team1.name ? `text-red-900` : `text-blue-900`
+              } text-center text-xs md:text-xl`}
             >
               {textCapitalize(team?.name)}
             </span>
+            {team.name === team2.name && (
+              <div className="ml-2 bg-blue-700 rounded-full text-white w-4 h-4  flex items-center justify-center text-center">
+                <span>2</span>
+              </div>
+            )}
           </div>
           <div className="flex justify-center mb-4">
             <div

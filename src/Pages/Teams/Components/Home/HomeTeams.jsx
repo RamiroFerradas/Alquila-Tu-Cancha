@@ -43,7 +43,7 @@ export default function HomeTeams() {
     <div
       className={`${styles.bgPelota} flex justify-center items-center h-screen `}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 grid-container mt-5 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 grid-container mt-16 ">
         {teams.map((ele) => (
           <div
             key={ele.name}
@@ -61,7 +61,7 @@ export default function HomeTeams() {
                   <span>2</span>
                 </div>
               )}
-              <p className="text-center text-xl capitalize">
+              <p className="text-center text-xl md:text-3xl capitalize">
                 {textCapitalize(ele.name)}
               </p>
               <button className="" onClick={() => editTeamName(ele)}>
@@ -71,7 +71,7 @@ export default function HomeTeams() {
               </button>
             </div>
             <div className="flex flex-col justify-center items-center">
-              <Players players={ele.players} />
+              <Players players={ele.players} team={ele.name} />
               <NoPlayers players={ele.players} />
             </div>
           </div>

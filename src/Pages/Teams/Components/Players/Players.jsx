@@ -5,7 +5,8 @@ import { useTeams } from "../../../../Hooks/useTeams";
 // import { averageRating } from "../../../../Utils/AverageRating";
 import player_unknown from "../../../CreateTeam/Assets/Player/profile_player.png";
 
-export default function Players({ players }) {
+export default function Players({ players, team }) {
+  const { team1, team2 } = useTeams();
   const { removePlayer } = useTeams();
   const { pathname } = useLocation();
 
@@ -26,7 +27,11 @@ export default function Players({ players }) {
           <div className="flex" key={index}>
             <div
               key={player_id}
-              className="flex gap-3 border-4 border-red-200 rounded-xl p-2 overflow-hidden h-12 w-96 items-center mb-2 relative justify-around text-white"
+              className={`flex gap-3 border-4 ${
+                team === team1.name
+                  ? `border-red-200 hover:bg-red-200 `
+                  : `border-blue-200 hover:bg-blue-200 `
+              } rounded-xl p-2 overflow-hidden h-12 w-96 items-center mb-2 relative justify-around text-white `}
             >
               <span className="inline-block rounded px-1 pt-1 pb-1 text-xs font-medium uppercase leading-normal">
                 {player_type.slice(0, 3)}
@@ -40,7 +45,7 @@ export default function Players({ players }) {
                   e.target.src = player_unknown;
                 }}
               />
-              <span className=" text-center text-blac text-lg font-bold flex-1 truncate">
+              <span className="text-center  text-md font-bold flex-1 truncate tracking-wider">
                 {player_name}
               </span>
 
