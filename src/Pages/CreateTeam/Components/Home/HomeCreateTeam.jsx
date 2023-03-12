@@ -18,13 +18,13 @@ export default function HomeCreateTeam() {
   const teamsRef = useRef();
 
   return (
-    <div className={`px-6 md:p-0 ${styles.bg} `}>
+    <div className={` md:p-0 ${styles.bg} `}>
       {(!continueButton && !team1.name) || (!continueButton && !team2.name) ? (
         <div className="h-4/5  overflow-hidden">
           <MyTeams setContinueButton={setContinueButton} />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="px-6 grid grid-cols-1 md:grid-cols-3 gap-4">
           <section
             ref={countriesRef}
             className={`bg-gray-900 bg-opacity-40 backdrop-blur-xs`}
