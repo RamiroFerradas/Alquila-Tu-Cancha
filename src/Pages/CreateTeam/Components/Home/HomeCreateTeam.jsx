@@ -24,7 +24,7 @@ export default function HomeCreateTeam() {
   };
 
   return (
-    <div className={` md:p-0 ${isBgLoaded ? styles.bg : ""}`}>
+    <div className={` md:p-0 ${styles.bgPelota}`}>
       {(!continueButton && !team1.name) || (!continueButton && !team2.name) ? (
         <div className="h-4/5  overflow-hidden">
           <MyTeams setContinueButton={setContinueButton} />

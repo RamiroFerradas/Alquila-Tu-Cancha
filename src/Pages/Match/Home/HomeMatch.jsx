@@ -3,7 +3,7 @@ import FootballMatch from "../FootballMatch/FootballMatch";
 
 export default function HomeMatch() {
   return (
-    <div>
+    <div className=" bg-gray-400 overflow-hidden">
       <FootballMatch />
     </div>
   );

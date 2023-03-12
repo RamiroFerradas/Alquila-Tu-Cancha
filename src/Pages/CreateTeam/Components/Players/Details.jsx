@@ -105,12 +105,6 @@ export default function Details({
                         <span className="font-semibold mr-2">Posicion</span>
                         {data?.[0].player_type.slice()}
                       </p>
-                      {/* {averageRating !== 0 && (
-                        <p className="text-md">
-                          <span className="font-semibold mr-2">Puntuacion</span>
-                          {averageRating * 10}
-                        </p>
-                      )} */}
                     </div>
                   </div>
                   <div className="overflow-auto h-40">
