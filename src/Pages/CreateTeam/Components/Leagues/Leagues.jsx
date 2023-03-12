@@ -18,8 +18,8 @@ export default function Leagues({
     <div>
       {!countryId ? (
         <div className="flex justify-center items-center h-screen">
-          <p className="text-center">
-            Primero selecciona un pais para elegir una liga...
+          <p className="text-center text-white">
+            Selecciona un pais para elegir una liga...
           </p>
         </div>
       ) : loading ? (
@@ -43,6 +43,10 @@ export default function Leagues({
                     }, 200);
                   }}
                 >
+                  <span className="text-s text-center text-white">
+                    {league_name}
+                  </span>
+
                   <img
                     className="max-w-full rounded-lg h-16 w-20 object-cover"
                     src={league_logo ? league_logo : country_logo}
@@ -53,7 +57,6 @@ export default function Leagues({
                       e.target.src = country_logo;
                     }}
                   />
-                  <span className="text-sm text-center">{league_name}</span>
                 </div>
               )
             )}

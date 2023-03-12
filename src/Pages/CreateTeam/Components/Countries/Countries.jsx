@@ -34,7 +34,7 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
               }}
               className="cursor-pointer mt-8 flex flex-col items-center"
             >
-              <p className="text-center">{country_name}</p>
+              <p className="text-center text-white">{country_name}</p>
               <img
                 className="max-w-full rounded-lg h-16 w-20 object-cover"
                 src={

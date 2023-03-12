@@ -14,6 +14,9 @@ module.exports = withMT({
         handwriting: ["Caveat", "cursive"],
       },
     },
+    backdropBlur: {
+      xs: "2px",
+    },
   },
   plugins: [require("tw-elements/dist/plugin")],
 });
