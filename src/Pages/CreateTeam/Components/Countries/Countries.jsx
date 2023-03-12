@@ -12,7 +12,7 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
   const [countreiesFiltered, setCountreiesFiltered] = useState([]);
 
   return (
-    <div className="p-2 flex flex-col h-screen bg-gradient-to-br from-lime-400 via-violet-300 to-neutral-200 ">
+    <div className="p-2 flex flex-col h-screen">
       <div className="flex gap-2 items-center justify-center mt-16">
         <p className="text-md">Paises</p>
       </div>

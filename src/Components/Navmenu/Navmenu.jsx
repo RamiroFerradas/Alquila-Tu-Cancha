@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTeams } from "../../Hooks/useTeams";
+import logo from "../../assets/Logo/mainLogo.svg";
 
 export default function Navmenu() {
   const [openNav, setOpenNav] = useState(false);
@@ -74,12 +75,12 @@ export default function Navmenu() {
           variant="small"
           className="mr-4 cursor-pointer py-1.5 font-normal"
         >
-          <p className="font-handwriting text-2xl font-bold">
-            Alquila tu cancha
-          </p>
+          <NavLink to={"/"}>
+            <img src={logo} alt="Alquila tu cancha" className="h-10 " />
+          </NavLink>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
-        <DisabledNavLink to={"match"} disabled={!team1.name || !team2.name}>
+        <DisabledNavLink to={"/match"} disabled={!team1.name || !team2.name}>
           <Button
             disabled={!team1.name || !team2.name}
             variant="gradient"

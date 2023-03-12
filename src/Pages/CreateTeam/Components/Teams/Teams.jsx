@@ -15,7 +15,9 @@ export default function Teams({ leagueId, setPlayers, players }) {
   const [teamFiltered, setTeamFiltered] = useState([]);
 
   return (
-    <div className="bg-gradient-to-br from-lime-400 via-violet-300 to-neutral-200">
+    <div
+    // className="bg-gradient-to-br from-lime-400 via-violet-300 to-neutral-200"
+    >
       {!leagueId ? (
         <div className="flex justify-center items-center h-screen">
           <p className="text-center">

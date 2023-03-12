@@ -11,12 +11,14 @@ export default function Landing() {
         <img src={logo} alt="Alquila tu cancha" className="h-20 mb-10" />
         <div className="w-full md:w-1/2 p-6 flex flex-col justify-center items-center  bg-gray-900 bg-opacity-60 gap-5">
           <p className="text-2xl md:text-5xl text-white">
-            Bienvenido a la nueva plataforma jugable de la marca.
+            Bienvenido nueva plataforma jugable de nuestra marca.
           </p>
           <p className="text-white text-xs md:text-md">
-            Te invitamos a que ingreses y pruebes, las distintas
-            funcionalidades, como crear dos equipos con jugadores a eleccion y
-            disputar un partido
+            Aquí podrás disfrutar de una experiencia única al crear tus equipos
+            de jugadores favoritos y competir en partidos emocionantes. Descubre
+            las numerosas funciones que ofrecemos, desde personalizar tus
+            equipos hasta poder disputar un aprtido entre ambos. ¡Diviértete y
+            disfruta de la emoción del deporte en nuestra plataforma!
           </p>
 
           <Link

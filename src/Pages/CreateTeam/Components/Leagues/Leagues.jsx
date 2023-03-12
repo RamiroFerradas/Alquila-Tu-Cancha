@@ -15,7 +15,7 @@ export default function Leagues({
   const [leagueFiltered, setLeagueFiltered] = useState([]);
 
   return (
-    <div className="bg-gradient-to-br from-lime-400 via-violet-300 to-neutral-200">
+    <div>
       {!countryId ? (
         <div className="flex justify-center items-center h-screen">
           <p className="text-center">
@@ -31,7 +31,7 @@ export default function Leagues({
           </div>
           <SearchBar setLeagueFiltered={setLeagueFiltered} data={data} />
 
-          <div className="flex-grow overflow-y-auto px-3 grid grid-cols-2 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto">
+          <div className="overflow-y-auto px-3 grid grid-cols-3 gap-4 flex-col md:h-screen h-auto">
             {leagueFiltered?.map(
               ({ league_name, league_logo, country_logo, league_id }) => (
                 <div
