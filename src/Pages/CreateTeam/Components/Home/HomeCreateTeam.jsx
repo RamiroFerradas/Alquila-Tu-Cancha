@@ -17,12 +17,6 @@ export default function HomeCreateTeam() {
   const leaguesRef = useRef();
   const teamsRef = useRef();
 
-  const [isBgLoaded, setIsBgLoaded] = useState(false);
-
-  const handleBgLoad = () => {
-    setIsBgLoaded(true);
-  };
-
   return (
     <div className={` md:p-0 ${styles.bgPelota}`}>
       {(!continueButton && !team1.name) || (!continueButton && !team2.name) ? (
@@ -73,7 +67,6 @@ export default function HomeCreateTeam() {
           </section>
         </div>
       )}
-      <img src={pelota} onLoad={handleBgLoad} className="hidden" alt="" />
     </div>
   );
 }

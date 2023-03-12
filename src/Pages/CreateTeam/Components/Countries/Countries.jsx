@@ -7,11 +7,11 @@ import SearchBar from "./SearchBar";
 
 export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
   const { data, loading } = useFetch(COUNTRIES_URL);
-  const [image, setImage] = useState("");
-
   const [countreiesFiltered, setCountreiesFiltered] = useState([]);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : data ? (
     <div className="p-2 flex flex-col h-screen">
       <div className="flex gap-2 items-center justify-center mt-16">
         <p className="text-xl text-white">Paises</p>
@@ -30,7 +30,6 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
                 setTimeout(() => {
                   scrollToSeccion(leaguesRef);
                 }, 200);
-                setImage(country_logo);
               }}
               className="cursor-pointer mt-8 flex flex-col items-center"
             >
@@ -51,5 +50,5 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
         )}
       </div>
     </div>
-  );
+  ) : null;
 }

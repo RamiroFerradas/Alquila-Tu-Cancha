@@ -51,7 +51,6 @@ export default function Leagues({
                     className="max-w-full rounded-lg h-16 w-20 object-cover pt-2"
                     src={league_logo ? league_logo : country_logo}
                     alt={league_name}
-                    loading="lazy"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = country_logo;

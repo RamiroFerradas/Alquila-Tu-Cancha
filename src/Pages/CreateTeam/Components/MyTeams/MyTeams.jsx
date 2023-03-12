@@ -2,6 +2,7 @@ import { Button, IconButton, Input } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { useTeams } from "../../../../Hooks/useTeams";
 import { IoIosFootball } from "react-icons/io";
+import { textCapitalize } from "../../../../Utils/TextCapitalize";
 export default function MyTeams({ setContinueButton }) {
   const { team1, team2, setteam1, setteam2 } = useTeams();
   const [names, setNames] = useState({
@@ -13,9 +14,14 @@ export default function MyTeams({ setContinueButton }) {
     const { name, value } = e.target;
 
     value
-      ? setNames({ ...names, [name]: { name: value, error: false } })
-      : setNames({ ...names, [name]: { name: value, error: true } });
-    console.log(names.team1);
+      ? setNames({
+          ...names,
+          [name]: { name: textCapitalize(value), error: false },
+        })
+      : setNames({
+          ...names,
+          [name]: { name: textCapitalize(value), error: true },
+        });
   };
 
   const handleSendNames = () => {
