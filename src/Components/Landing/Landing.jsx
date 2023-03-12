@@ -6,7 +6,7 @@ import { FaSignInAlt } from "react-icons/fa";
 
 export default function Landing() {
   return (
-    <div className={`h-screen ${styles.bg}  `}>
+    <div className={`h-screen ${styles.bg}`}>
       <div className=" bg-gray-700 bg-opacity-50 h-screen p-10 flex justify-start md:justify-center items-start flex-col">
         <img src={logo} alt="Alquila tu cancha" className="h-20 mb-10" />
         <div className="w-full md:w-1/2 p-6 flex flex-col justify-center items-center  bg-gray-900 bg-opacity-60 gap-5">
