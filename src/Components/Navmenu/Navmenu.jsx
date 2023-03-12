@@ -9,9 +9,11 @@ import {
 import { NavLink, useLocation } from "react-router-dom";
 import { useTeams } from "../../Hooks/useTeams";
 import logo from "../../assets/Logo/mainLogo.svg";
+import Swal from "sweetalert2";
 
 export default function Navmenu() {
   const [openNav, setOpenNav] = useState(false);
+  const [gameRoute, setGameRoute] = useState("");
   const { team1, team2 } = useTeams();
   useEffect(() => {
     window.addEventListener(
@@ -33,32 +35,57 @@ export default function Navmenu() {
     return <NavLink {...props} to={to} />;
   };
 
+  const startGame = () => {
+    if (team1.players.length === 5 && team2.players.length === 5) {
+      return "/match";
+    } else {
+      Swal.fire({
+        title: "No se puede iniciar el partido",
+        icon: "error",
+        text: "Por favor, asegúrate de que ambos equipos tengan 5 jugadores antes de iniciar el partido.",
+      });
+      return "";
+    }
+  };
+
+  const handleStartGame = () => {
+    if (team1.players.length === 5 && team2.players.length === 5) {
+      setGameRoute("/match");
+    } else {
+      Swal.fire({
+        title: "No se puede iniciar el partido",
+        icon: "error",
+        text: "Por favor, asegúrate de que ambos equipos tengan al menos 5 jugadores antes de iniciar el partido.",
+      });
+    }
+  };
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className={`p-1 font-norma ${pathname === "/create" && `text-red-800`}`}
+        className={`p-1 font-norma ${
+          pathname === "/create" && `text-green-700 text-xl`
+        }`}
       >
         <NavLink to={"/create"} className="flex items-center">
-          {`${
-            !team1.players || !team2.players
-              ? `Crear equipo`
-              : `Agregar Jugadores`
-          }`}
+          {`${!team1.players || !team2.players ? `Crear equipo` : `Jugadores`}`}
         </NavLink>
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className={`p-1 font-norma ${pathname === "/teams" && `text-red-800`}`}
+        className={`p-1 font-norma ${
+          pathname === "/teams" && `text-green-700 text-xl`
+        }`}
       >
         <DisabledNavLink
           disabled={!team1.name || !team2.name}
           to={"/teams"}
-          className="flex items-center"
+          className="flex items-center "
         >
           Mis equipos
         </DisabledNavLink>
@@ -80,12 +107,17 @@ export default function Navmenu() {
           </NavLink>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
-        <DisabledNavLink to={"/match"} disabled={!team1.name || !team2.name}>
+        <DisabledNavLink
+          to={gameRoute}
+          onClick={handleStartGame}
+          disabled={!team1.name || !team2.name}
+        >
           <Button
             disabled={!team1.name || !team2.name}
             variant="gradient"
             size="sm"
             className="hidden lg:inline-block"
+            color="green"
           >
             <span>Nuevo partido</span>
           </Button>
@@ -131,13 +163,14 @@ export default function Navmenu() {
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
-          <DisabledNavLink to={"/match"}>
+          <DisabledNavLink onClick={handleStartGame} to={gameRoute}>
             <Button
               variant="gradient"
               size="sm"
               fullWidth
               className="mb-2"
               disabled={!team1.name || !team2.name}
+              onClick={handleStartGame}
             >
               <span>Nuevo partido</span>
             </Button>

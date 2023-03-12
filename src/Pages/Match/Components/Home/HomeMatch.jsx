@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import useMatch from "../../../../Hooks/useMatch";
 import { useTeams } from "../../../../Hooks/useTeams";
 import Players from "../../../Teams/Components/Players/Players";
@@ -11,8 +11,10 @@ export default function HomeMatch() {
   const { timeLeft, startMatch, result, isPlaying, resetMatch, viewConfetti } =
     useMatch();
 
-  return (
-    <div className=" bg-gray-200 overflow-hidden">
+  return team1.players.length !== 5 && team2.players.length !== 5 ? (
+    <Navigate to="/" replace />
+  ) : (
+    <div className=" bg-gray-600 overflow-hidden">
       {viewConfetti && <ConfettiComponent />}
       <div className={`flex flex-col items-center justify-center h-screen`}>
         <div className="z-10 rounded-full opacity-50 absolute overflow-hidden h:auto md:h-screen">
@@ -24,12 +26,12 @@ export default function HomeMatch() {
         </div>
         <div className="flex flex-row justify-between w-full p-5">
           <div className="hidden  md:flex flex-col">
-            <h2 className="text-4xl font-bold mb-4 text-center">
+            <h2 className="text-4xl font-bold mb-4 text-white text-center">
               {team1.name}
             </h2>
-            <Players players={team1.players} />
+            <Players players={team1.players} team={team1.name} />
           </div>
-          <div className="z-20 flex flex-col items-center justify-center bg-gray-900 rounded-3xl p-20 bg-opacity-50 backdrop-blur-xs w-96">
+          <div className="z-20 flex flex-col items-center justify-center bg-gray-200 rounded-3xl p-20 bg-opacity-50 backdrop-blur-xs w-96">
             <h2 className="text-4xl font-bold mb-4 block md:hidden text-center">
               {team1.name} vs {team2.name}
             </h2>
@@ -62,10 +64,10 @@ export default function HomeMatch() {
             </div>
           </div>
           <div className="hidden  md:flex flex-col">
-            <h2 className="text-4xl font-bold mb-4 text-center">
+            <h2 className="text-white text-4xl font-bold mb-4 text-center">
               {team2.name}
             </h2>
-            <Players players={team2.players} />
+            <Players players={team2.players} team={team2.name} />
           </div>
         </div>
       </div>
