@@ -48,10 +48,10 @@ export default function MyTeams({ setContinueButton }) {
                 icon={<IoIosFootball />}
                 name="team1"
                 id="team1"
-                className="text-center text-xl border-red-600 border-xl"
+                className="text-center text-white text-xl"
                 error={names.team1.error && viewError}
-                color="yellow"
-                size="xl"
+                color="green"
+                size="lg"
               />
             </div>
           </div>
@@ -68,12 +68,12 @@ export default function MyTeams({ setContinueButton }) {
                 name="team2"
                 defaultValue={team2.name}
                 onChange={handleChangueSetName}
-                size="md"
+                size="lg"
                 label="Nombre del equipo B"
                 className="text-center text-xl text-white"
                 icon={<IoIosFootball />}
                 error={names.team2.error && viewError}
-                // color="light-green"
+                color="green"
               />
             </div>
           </div>
