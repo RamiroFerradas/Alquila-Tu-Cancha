@@ -14,7 +14,7 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
   return (
     <div className="p-2 flex flex-col h-screen">
       <div className="flex gap-2 items-center justify-center mt-16">
-        <p className="text-md">Paises</p>
+        <p className="text-xl text-white">Paises</p>
       </div>
 
       <SearchBar setCountreiesFiltered={setCountreiesFiltered} data={data} />
@@ -34,16 +34,17 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
               }}
               className="cursor-pointer mt-8 flex flex-col items-center"
             >
-              <p className="text-center text-white">{country_name}</p>
+              <p className="text-sm md:text-md text-center text-white">
+                {country_name}
+              </p>
               <img
-                className="max-w-full rounded-lg h-16 w-20 object-cover"
+                className="max-w-full rounded-lg h-16 w-20 object-cover pt-2"
                 src={
                   country_logo
                     ? country_logo
                     : data?.[data.length - 3].country_logo
                 }
                 alt={country_name}
-                loading="lazy"
               />
             </div>
           )

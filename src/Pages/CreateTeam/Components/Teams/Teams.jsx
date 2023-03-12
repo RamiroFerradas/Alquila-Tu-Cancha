@@ -20,8 +20,8 @@ export default function Teams({ leagueId, setPlayers, players }) {
     >
       {!leagueId ? (
         <div className="flex justify-center items-center h-screen">
-          <p className="text-center">
-            Primero selecciona una liga para elegir un equipo...
+          <p className="text-center text-xl text-white">
+            Selecciona una liga para elegir un equipo...
           </p>
         </div>
       ) : loading ? (
@@ -36,7 +36,7 @@ export default function Teams({ leagueId, setPlayers, players }) {
             setPlayers={setPlayers}
           />
           <div className="flex gap-2 items-center justify-center mt-16">
-            <p className="text-md ">Equipos</p>
+            <p className="text-md text-white ">Equipos</p>
           </div>
           <SearchBar setTeamFiltered={setTeamFiltered} data={data} />
 
@@ -51,8 +51,12 @@ export default function Teams({ leagueId, setPlayers, players }) {
                   setTeamName(team_name);
                 }}
               >
+                <span className="text-sm md:text-md text-center text-white">
+                  {team_name}
+                </span>
+
                 <img
-                  className="max-w-full rounded-lg h-20 w-24 object-cover"
+                  className="max-w-full rounded-lg h-20 w-24 object-cover pt-2"
                   src={team_badge}
                   alt={team_name}
                   // data-src={team_badge}
@@ -61,7 +65,6 @@ export default function Teams({ leagueId, setPlayers, players }) {
                     e.target.src = unknow_team; // imagen de respaldo
                   }}
                 />
-                <span className="text-sm text-center">{team_name}</span>
               </div>
             ))}
           </div>

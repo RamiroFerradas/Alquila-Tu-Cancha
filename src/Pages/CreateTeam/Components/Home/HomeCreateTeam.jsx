@@ -27,7 +27,7 @@ export default function HomeCreateTeam() {
         <div className="px-6 grid grid-cols-1 md:grid-cols-3 gap-4">
           <section
             ref={countriesRef}
-            className={`bg-gray-900 bg-opacity-40 backdrop-blur-xs`}
+            className={`bg-gray-900 bg-opacity-70 backdrop-blur-xs`}
           >
             <Countries
               setCountryId={setCountryId}
@@ -40,7 +40,7 @@ export default function HomeCreateTeam() {
             ref={leaguesRef}
             className={`${
               !countryId && `hidden`
-            } md:block bg-gray-900 bg-opacity-40 backdrop-blur-xs`}
+            } md:block bg-gray-900 bg-opacity-70 backdrop-blur-xs`}
           >
             <Leagues
               leaguesRef={leaguesRef}
@@ -55,7 +55,7 @@ export default function HomeCreateTeam() {
             ref={teamsRef}
             className={`${
               !leagueId && `hidden`
-            } md:block bg-gray-900 bg-opacity-40 backdrop-blur-xs`}
+            } md:block bg-gray-900 bg-opacity-70 backdrop-blur-xs`}
           >
             <Teams
               teamsRef={teamsRef}

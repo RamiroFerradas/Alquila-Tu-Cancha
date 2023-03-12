@@ -18,7 +18,7 @@ export default function Leagues({
     <div>
       {!countryId ? (
         <div className="flex justify-center items-center h-screen">
-          <p className="text-center text-white">
+          <p className="text-center text-white text-xl">
             Selecciona un pais para elegir una liga...
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function Leagues({
       ) : data ? (
         <div className=" p-2 flex flex-col h-screen">
           <div className="flex gap-2 items-center justify-center mt-16">
-            <p className="text-md ">Ligas</p>
+            <p className="text-xl text-white ">Ligas</p>
           </div>
           <SearchBar setLeagueFiltered={setLeagueFiltered} data={data} />
 
@@ -43,12 +43,12 @@ export default function Leagues({
                     }, 200);
                   }}
                 >
-                  <span className="text-s text-center text-white">
+                  <span className="text-sm md:text-md text-center text-white">
                     {league_name}
                   </span>
 
                   <img
-                    className="max-w-full rounded-lg h-16 w-20 object-cover"
+                    className="max-w-full rounded-lg h-16 w-20 object-cover pt-2"
                     src={league_logo ? league_logo : country_logo}
                     alt={league_name}
                     loading="lazy"
