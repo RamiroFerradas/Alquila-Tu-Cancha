@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { textCapitalize } from "../../../../Utils/TextCapitalize";
 import styles from "./HomeTeams.module.css";
 import NoPlayers from "../Players/NoPlayers";
+import { Navigate } from "react-router-dom";
 
 export default function HomeTeams() {
   const { team1, setteam1, setteam2, team2 } = useTeams();
@@ -39,7 +40,9 @@ export default function HomeTeams() {
     });
   };
 
-  return (
+  return !team1.name && !team2.name ? (
+    <Navigate to="/create" replace />
+  ) : (
     <div
       className={`${styles.bgPelota} flex justify-center items-center h-screen `}
     >
