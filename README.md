@@ -59,6 +59,10 @@ npm install
 npm run dev
 ```
 
+<span id="recorrido"></span>
+
+## Recorrido:
+
 <span id="landing"></span>
 
 ### Landing:
