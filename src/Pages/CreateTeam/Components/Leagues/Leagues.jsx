@@ -36,6 +36,7 @@ export default function Leagues({
             {leagueFiltered?.map(
               ({ league_name, league_logo, country_logo, league_id }) => (
                 <div
+                  key={league_id}
                   className="cursor-pointer mt-8 flex flex-col items-center"
                   onClick={() => {
                     setLeagueId(league_id);

@@ -1,4 +1,4 @@
-import { useCallback, useState, Fragment, useEffect, useMemo } from "react";
+import { useCallback, useState, Fragment } from "react";
 import player_unknown from "../../Assets/Player/profile_player.png";
 import { FaWindowClose } from "react-icons/fa";
 import Details from "./Details";
@@ -15,8 +15,7 @@ import {
 import useFetch from "../../../../Hooks/useFetch";
 import Loader from "../../../../Components/Loader/Loader";
 import SearchBar from "../SearchBar/SearchBar";
-import { PLAYER_URL } from "../../../../services";
-import SearchBarGlobal from "../SearchBar/SearchBarGlobal";
+import { TEAMS_URL } from "../../../../services";
 
 export default function Players({
   showModal,
@@ -24,14 +23,12 @@ export default function Players({
   players,
   teamName,
   setPlayers,
-  searchGlobal,
 }) {
   const [playerName, setPlayerName] = useState();
   const [playerImage, setPlayerImage] = useState();
   const [openDetail, setOpenDetail] = useState(false);
   const { team1, team2, selectPlayer, removePlayer } = useTeams();
-  const { loading } = useFetch(PLAYER_URL(playerName));
-  const [playerFilteredGlobal, setPlayerFilteredGlobal] = useState([]);
+  const { loading } = useFetch(TEAMS_URL(teamName));
   const [playerFiltered, setPlayerFiltered] = useState([]);
 
   const handleOpenModal = (e) => {
@@ -94,12 +91,12 @@ export default function Players({
     [team1.players, team2.players]
   );
 
-  const [playersRender, setPlayersRender] = useState([]);
-  useEffect(() => {
-    !searchGlobal
-      ? setPlayersRender(playerFiltered)
-      : setPlayersRender(playerFilteredGlobal);
-  }, [playerFiltered, playerFilteredGlobal, searchGlobal]);
+  // const [playersRender, setPlayersRender] = useState([]);
+  // useEffect(() => {
+  //   !searchGlobal
+  //     ? setPlayersRender(playerFiltered)
+  //     : setPlayersRender(playerFilteredGlobal);
+  // }, [playerFiltered, playerFilteredGlobal, searchGlobal]);
 
   return (
     <Fragment>
@@ -137,11 +134,10 @@ export default function Players({
           </p>
         </button>
         <DialogBody>
-          {!searchGlobal && (
-            <p className="text-center p-0 m-0 right-0 absolute left-0 top-1 text-xl md:text-2xl font-bold text-white tracking-wider  ">
-              {teamName}
-            </p>
-          )}
+          <p className="text-center p-0 m-0 right-0 absolute left-0 top-1 text-xl md:text-2xl font-bold text-white tracking-wider  ">
+            {teamName}
+          </p>
+
           {loading ? (
             <Loader />
           ) : players ? (
@@ -149,28 +145,18 @@ export default function Players({
               onClick={(event) => event.stopPropagation()}
               className="bg-gray-300 bg-opacity-40 backdrop-blur-xs p-1 mt-5 rounded-2xl overflow-auto h-[80vh]"
             >
-              {searchGlobal ? (
-                <SearchBarGlobal
-                  setPlayerFilteredGlobal={setPlayerFilteredGlobal}
-                  playerFilteredGlobal={playerFilteredGlobal}
-                />
-              ) : (
-                <>
-                  <TeamsIndicator />
-                  <div className="flex flex-col justify-center items-center relative">
-                    <div className="md:w-1/2 w-full block md:absolute bottom-2">
-                      <SearchBar
-                        searchGlobal={searchGlobal}
-                        setPlayerFiltered={setPlayerFiltered}
-                        data={players}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
+              <TeamsIndicator />
+              <div className="flex flex-col justify-center items-center relative">
+                <div className="md:w-1/2 w-full block md:absolute bottom-2">
+                  <SearchBar
+                    setPlayerFiltered={setPlayerFiltered}
+                    data={players}
+                  />
+                </div>
+              </div>
 
               <div className="p-1 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 rounded-xl overflow-auto">
-                {playersRender?.map((ele) => {
+                {playerFiltered?.map((ele) => {
                   const showButtonCancel = existPlayer(ele);
                   const findTeam1 = team1.players.find(
                     (p) => p.player_key === ele.player_key
@@ -204,7 +190,7 @@ export default function Players({
                       </p>
                       <img
                         className="rounded-3xl object-cover h-28"
-                        // loading="lazy"
+                        loading="lazy"
                         src={
                           ele.player_image ? ele.player_image : player_unknown
                         }
