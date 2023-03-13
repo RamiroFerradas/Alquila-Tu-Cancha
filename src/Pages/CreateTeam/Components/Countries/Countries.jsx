@@ -20,8 +20,9 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
       <SearchBar setCountreiesFiltered={setCountreiesFiltered} data={data} />
 
       <div className="flex-grow overflow-y-auto px-3 grid grid-cols-3 gap-4 flex-col md:h-screen h-auto">
-        {countreiesFiltered?.map(
-          ({ country_name, country_logo, country_id }) => (
+        {countreiesFiltered
+          ?.sort((a, b) => a.country_name.localeCompare(b.country_name))
+          .map(({ country_name, country_logo, country_id }) => (
             <div
               key={country_id}
               onClick={() => {
@@ -46,8 +47,7 @@ export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
                 alt={country_name}
               />
             </div>
-          )
-        )}
+          ))}
       </div>
     </div>
   ) : null;

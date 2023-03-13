@@ -36,33 +36,35 @@ export default function Teams({
           <SearchBar setTeamFiltered={setTeamFiltered} data={data} />
 
           <div className="flex-grow overflow-y-auto px-3 grid grid-cols-3 md:grid-cols-3 gap-4 flex-col md:h-screen h-auto">
-            {teamFiltered?.map(({ team_name, team_badge, players }, index) => (
-              <div
-                key={index}
-                className="cursor-pointer mt-8 flex flex-col items-center"
-                onClick={() => {
-                  setPlayers(players);
-                  setShowModal(true);
-                  setTeamName(team_name);
-                  setSearchGlobal(false);
-                }}
-              >
-                <span className="text-sm md:text-md text-center text-white">
-                  {team_name}
-                </span>
-
-                <img
-                  className="max-w-full rounded-lg h-20 w-24 object-cover pt-2"
-                  src={team_badge}
-                  alt={team_name}
-                  // data-src={team_badge}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = unknow_team;
+            {teamFiltered
+              ?.sort((a, b) => a.team_name.localeCompare(b.team_name))
+              .map(({ team_name, team_badge, players }, index) => (
+                <div
+                  key={index}
+                  className="cursor-pointer mt-8 flex flex-col items-center"
+                  onClick={() => {
+                    setPlayers(players);
+                    setShowModal(true);
+                    setTeamName(team_name);
+                    setSearchGlobal(false);
                   }}
-                />
-              </div>
-            ))}
+                >
+                  <span className="text-sm md:text-md text-center text-white">
+                    {team_name}
+                  </span>
+
+                  <img
+                    className="max-w-full rounded-lg h-20 w-24 object-cover pt-2"
+                    src={team_badge}
+                    alt={team_name}
+                    // data-src={team_badge}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = unknow_team;
+                    }}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       ) : null}

@@ -33,8 +33,9 @@ export default function Leagues({
           <SearchBar setLeagueFiltered={setLeagueFiltered} data={data} />
 
           <div className="overflow-y-auto px-3 grid grid-cols-3 gap-4 flex-col md:h-screen h-auto">
-            {leagueFiltered?.map(
-              ({ league_name, league_logo, country_logo, league_id }) => (
+            {leagueFiltered
+              ?.sort((a, b) => a.league_name.localeCompare(b.league_name))
+              .map(({ league_name, league_logo, country_logo, league_id }) => (
                 <div
                   key={league_id}
                   className="cursor-pointer mt-8 flex flex-col items-center"
@@ -59,8 +60,7 @@ export default function Leagues({
                     }}
                   />
                 </div>
-              )
-            )}
+              ))}
           </div>
         </div>
       ) : null}

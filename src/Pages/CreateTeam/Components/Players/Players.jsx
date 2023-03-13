@@ -103,7 +103,7 @@ export default function Players({
           unmount: { scale: 0.9, y: -100 },
         }}
         size="xl"
-        className="bg-gray-900 bg-opacity-50 backdrop-blur-xs"
+        className="min-w-full md:min-w-0 bg-gray-900 bg-opacity-50 backdrop-blur-xs"
       >
         {openDetail ? (
           <Details
