@@ -62,7 +62,7 @@ npm run dev
 - En el transcursode la seleccion de jugadores iremos viendo como se completan los indicadores y si un jugador ya fue agregado no se podra volver a agregar a ninguno de los equipos.
 <p align="center"><img height="200" src="./src/assets/ScreenShots/playersSelected.jpg" /><p>
 
--Si navegamos a "Mis Equipos" nos encontramos con el estado de nuestros equipos pudiendo ver la cantidad de jugadores seleccionados, los espacios restantes, eliminar/agregar jugadores y un boton para editar el nombre de nuestros equipos.
+- Si navegamos a "Mis Equipos" nos encontramos con el estado de nuestros equipos pudiendo ver la cantidad de jugadores seleccionados, los espacios restantes, eliminar/agregar jugadores y un boton para editar el nombre de nuestros equipos.
 
 <p align="center"><img height="200" src="./src/assets/ScreenShots/MyTeams.jpg" /><p>
 
