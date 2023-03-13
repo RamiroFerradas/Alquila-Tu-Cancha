@@ -40,7 +40,7 @@ export default function HomeMatch() {
               {team2.name}
             </p>
             <p className="text-2xl mt-5 md:mt-0">Resultado</p>
-            <p className="text-2xl mb-8">
+            <p className="text-2xl mb-8 whitespace-nowrap">
               <span className="inline-block md:hidden mr-4">{team1.name}</span>
               {result.team1_score} - {result.team2_score}
               <span className="inline-block md:hidden ml-4">{team2.name}</span>
