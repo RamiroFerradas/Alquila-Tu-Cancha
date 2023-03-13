@@ -52,12 +52,19 @@ export default function Navmenu() {
         variant="small"
         color="blue-gray"
         className={`p-1 font-norma ${
-          pathname === "/create" && `text-green-700 text-xl`
+          pathname === "/create" &&
+          team1.name &&
+          team2.name &&
+          `text-green-700 text-xl`
         }`}
       >
-        <NavLink to={"/create"} className="flex items-center">
+        <DisabledNavLink
+          disabled={!team1.name || !team2.name}
+          to={"/create"}
+          className="flex items-center"
+        >
           {`${!team1.players || !team2.players ? `Crear equipo` : `Jugadores`}`}
-        </NavLink>
+        </DisabledNavLink>
       </Typography>
       <Typography
         as="li"
@@ -107,43 +114,45 @@ export default function Navmenu() {
             <span>JUGAR</span>
           </Button>
         </DisabledNavLink>
-        <IconButton
-          variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-          ripple={false}
-          onClick={() => setOpenNav(!openNav)}
-        >
-          {openNav ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              className="h-6 w-6"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
-        </IconButton>
+        {team1.name && team1.name ? (
+          <IconButton
+            variant="text"
+            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+            ripple={false}
+            onClick={() => setOpenNav(!openNav)}
+          >
+            {openNav ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                className="h-6 w-6"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
+          </IconButton>
+        ) : null}
       </div>
       <MobileNav open={openNav}>
         <div className="container mx-auto">
