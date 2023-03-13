@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import useMatch from "../../../../Hooks/useMatch";
 import { useTeams } from "../../../../Hooks/useTeams";
 import Players from "../../../Teams/Components/Players/Players";
-import pelota from "../../Assets/Backgrounds/PngItem_158877.png";
+import pelota from "../../Assets/Backgrounds/pelota2.png";
 import ConfettiComponent from "../Confetti/ConfettiComponent";
 
 export default function HomeMatch() {
@@ -31,10 +31,14 @@ export default function HomeMatch() {
             </h2>
             <Players players={team1.players} team={team1.name} />
           </div>
-          <div className="z-20 flex flex-col items-center justify-center bg-gray-200 rounded-3xl p-20 bg-opacity-50 backdrop-blur-xs w-96">
-            <h2 className="text-4xl font-bold mb-4 block md:hidden text-center">
-              {team1.name} vs {team2.name}
-            </h2>
+          <div className="z-20 flex flex-col items-center justify-center bg-gray-200 rounded-3xl p-20 bg-opacity-50 w-96">
+            <p className="text-4xl font-bold mb-0 md:mb-4 block md:hidden text-center">
+              {team1.name}
+            </p>
+            <p className="text-3xl block md:hidden ">vs</p>
+            <p className="text-4xl font-bold mb-0 md:mb-4 block md:hidden text-center">
+              {team2.name}
+            </p>
             <h3 className="text-2xl mb-">Resultado</h3>
             <h3 className="text-2xl mb-8">
               {result.team1_score} - {result.team2_score}

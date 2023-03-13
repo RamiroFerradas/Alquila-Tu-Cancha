@@ -6,7 +6,7 @@ export default function ConfettiComponent() {
     <Confetti
       width={window.innerWidth || 300}
       height={window.innerHeight || 200}
-      className="z-20"
+      className="z-40"
       numberOfPieces={500}
     />
   );

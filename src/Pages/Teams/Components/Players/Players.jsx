@@ -1,8 +1,6 @@
 import { Button } from "@material-tailwind/react";
-import { useDrag } from "react-dnd";
 import { useLocation } from "react-router-dom";
 import { useTeams } from "../../../../Hooks/useTeams";
-// import { averageRating } from "../../../../Utils/AverageRating";
 import player_unknown from "../../../CreateTeam/Assets/Player/profile_player.png";
 
 export default function Players({ players, team }) {

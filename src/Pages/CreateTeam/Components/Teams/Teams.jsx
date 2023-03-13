@@ -3,13 +3,15 @@ import Loader from "../../../../Components/Loader/Loader";
 import useFetch from "../../../../Hooks/useFetch";
 import { TEAMS_URL } from "../../../../services";
 import unknow_team from "../../Assets/Player/unknown_team.jpg";
-import SearchBar from "../Countries/SearchBar";
-import Players from "../Players/Players";
+import SearchBar from "../SearchBar/SearchBar";
 
-export default function Teams({ leagueId, setPlayers, players }) {
-  const [showModal, setShowModal] = useState(false);
-  const [teamName, setTeamName] = useState([]);
-
+export default function Teams({
+  leagueId,
+  setPlayers,
+  setShowModal,
+  setTeamName,
+  setSearchGlobal,
+}) {
   let { data, loading } = useFetch(TEAMS_URL(leagueId));
   if (!leagueId) data = [];
   const [teamFiltered, setTeamFiltered] = useState([]);
@@ -28,13 +30,6 @@ export default function Teams({ leagueId, setPlayers, players }) {
         <Loader />
       ) : data ? (
         <div className="flex flex-col h-screen p-2">
-          <Players
-            showModal={showModal}
-            setShowModal={setShowModal}
-            players={players}
-            teamName={teamName}
-            setPlayers={setPlayers}
-          />
           <div className="flex gap-2 items-center justify-center mt-16">
             <p className="text-md text-white ">Equipos</p>
           </div>
@@ -49,6 +44,7 @@ export default function Teams({ leagueId, setPlayers, players }) {
                   setPlayers(players);
                   setShowModal(true);
                   setTeamName(team_name);
+                  setSearchGlobal(false);
                 }}
               >
                 <span className="text-sm md:text-md text-center text-white">
@@ -61,8 +57,8 @@ export default function Teams({ leagueId, setPlayers, players }) {
                   alt={team_name}
                   // data-src={team_badge}
                   onError={(e) => {
-                    e.target.onerror = null; // evitar un bucle infinito de errores
-                    e.target.src = unknow_team; // imagen de respaldo
+                    e.target.onerror = null;
+                    e.target.src = unknow_team;
                   }}
                 />
               </div>

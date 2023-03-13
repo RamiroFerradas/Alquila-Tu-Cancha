@@ -8,6 +8,7 @@ export default function SearchBar({
   setPlayerFiltered,
 }) {
   const [input, setInput] = useState("");
+
   const setFilter = setCountreiesFiltered
     ? setCountreiesFiltered
     : setLeagueFiltered
@@ -38,7 +39,7 @@ export default function SearchBar({
     handleFilter(input);
   }, [input, handleFilter]);
 
-  const handleSearchCountrie = (e) => {
+  const handleSearch = (e) => {
     const name = e.target.value.toLowerCase();
     setInput(name);
   };
@@ -49,7 +50,7 @@ export default function SearchBar({
           type="text"
           className="text-center block px-4 py-2 text-purple-700 bg-white border focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40 w-full h-8 rounded-xl"
           placeholder={`Buscar`}
-          onChange={handleSearchCountrie}
+          onChange={handleSearch}
           style={{ boxSizing: "border-box" }}
         />
       </div>

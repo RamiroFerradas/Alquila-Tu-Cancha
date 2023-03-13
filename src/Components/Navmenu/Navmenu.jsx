@@ -10,19 +10,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useTeams } from "../../Hooks/useTeams";
 import logo from "../../assets/Logo/mainLogo.svg";
 import Swal from "sweetalert2";
+import useGameRoute from "../../Hooks/useGameRoute";
 
 export default function Navmenu() {
   const [openNav, setOpenNav] = useState(false);
-  const [gameRoute, setGameRoute] = useState("");
   const { team1, team2 } = useTeams();
-  useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
-  }, []);
-
   const { pathname } = useLocation();
+  const { gameRoute } = useGameRoute();
 
   const DisabledNavLink = ({ to, disabled, ...props }) => {
     if (disabled) {
@@ -35,23 +29,8 @@ export default function Navmenu() {
     return <NavLink {...props} to={to} />;
   };
 
-  const startGame = () => {
-    if (team1.players.length === 5 && team2.players.length === 5) {
-      return "/match";
-    } else {
-      Swal.fire({
-        title: "No se puede iniciar el partido",
-        icon: "error",
-        text: "Por favor, asegúrate de que ambos equipos tengan 5 jugadores antes de iniciar el partido.",
-      });
-      return "";
-    }
-  };
-
   const handleStartGame = () => {
-    if (team1.players.length === 5 && team2.players.length === 5) {
-      setGameRoute("/match");
-    } else {
+    if (team1.players.length < 5 || team2.players.length < 5) {
       Swal.fire({
         title: "No se puede iniciar el partido",
         icon: "error",
@@ -59,6 +38,12 @@ export default function Navmenu() {
       });
     }
   };
+  useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpenNav(false)
+    );
+  }, []);
 
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -108,8 +93,8 @@ export default function Navmenu() {
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <DisabledNavLink
-          to={gameRoute}
           onClick={handleStartGame}
+          to={gameRoute}
           disabled={!team1.name || !team2.name}
         >
           <Button
@@ -119,7 +104,7 @@ export default function Navmenu() {
             className="hidden lg:inline-block"
             color="green"
           >
-            <span>Nuevo partido</span>
+            <span>JUGAR</span>
           </Button>
         </DisabledNavLink>
         <IconButton
@@ -170,9 +155,8 @@ export default function Navmenu() {
               fullWidth
               className="mb-2"
               disabled={!team1.name || !team2.name}
-              onClick={handleStartGame}
             >
-              <span>Nuevo partido</span>
+              <span>JUGAR</span>
             </Button>
           </DisabledNavLink>
         </div>

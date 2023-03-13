@@ -24,8 +24,12 @@ export default function useMatch() {
   });
 
   const startMatch = () => {
-    // resetMatch();
-    const timeLimit = 60; // duración en segundos
+    setTimeLeft(60);
+    setResult({
+      team1_score: 0,
+      team2_score: 0,
+    });
+
     const team1ScoreProbability =
       team1.players.reduce((total, player) => {
         const rating = parseInt(player.player_rating, 10);
@@ -68,16 +72,9 @@ export default function useMatch() {
       setTimeLeft((prevState) => prevState - 1);
     }, 1000);
 
-    function formatTime(seconds) {
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      return `${mins < 10 ? "0" : ""}${mins}:${secs < 10 ? "0" : ""}${secs}`;
-    }
-
     setTimeout(() => {
       clearInterval(timer);
       setIsPlaying(false);
-      setTimeLeft(60);
       setViewConfetti(true);
       setTimeout(() => {
         setViewConfetti(false);

@@ -3,7 +3,8 @@ import Loader from "../../../../Components/Loader/Loader";
 import useFetch from "../../../../Hooks/useFetch";
 import { LEAGUES_URL } from "../../../../services";
 import { scrollToSeccion } from "../../../../Utils/ScrollToSeccion";
-import SearchBar from "../Countries/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
+import unknow_league from "../../Assets/Player/unknown_team.jpg";
 
 export default function Leagues({
   countryId,
@@ -53,7 +54,7 @@ export default function Leagues({
                     alt={league_name}
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = country_logo;
+                      e.target.src = unknow_league;
                     }}
                   />
                 </div>
