@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { fetchData } from "../../../../../fetchData";
+import { useState } from "react";
 import Loader from "../../../../Components/Loader/Loader";
 import useFetch from "../../../../Hooks/useFetch";
 import { COUNTRIES_URL } from "../../../../services";
 import { scrollToSeccion } from "../../../../Utils/ScrollToSeccion";
 import SearchBar from "../SearchBar/SearchBar";
-const apidata = fetchData(COUNTRIES_URL);
 
 export default function Countries({ setCountryId, setLeagueId, leaguesRef }) {
   const { data, loading } = useFetch(COUNTRIES_URL);
