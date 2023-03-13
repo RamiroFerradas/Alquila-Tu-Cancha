@@ -39,10 +39,12 @@ export default function HomeMatch() {
             <p className="text-4xl font-bold mb-0 md:mb-4 block md:hidden text-center">
               {team2.name}
             </p>
-            <h3 className="text-2xl mb-">Resultado</h3>
-            <h3 className="text-2xl mb-8">
+            <p className="text-2xl mt-5 md:mt-0">Resultado</p>
+            <p className="text-2xl mb-8">
+              <span className="inline-block md:hidden mr-4">{team1.name}</span>
               {result.team1_score} - {result.team2_score}
-            </h3>
+              <span className="inline-block md:hidden ml-4">{team2.name}</span>
+            </p>
             <div className="flex flex-col space-y-4">
               <button
                 className={`py-4 px-8 bg-blue-500 disabled:hover:bg-gray-500 disabled:bg-gray-600 hover:bg-blue-600 text-white rounded-lg shadow-lg transition-colors duration-300`}
