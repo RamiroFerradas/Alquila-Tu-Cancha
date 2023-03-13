@@ -13,7 +13,7 @@ export default function Landing() {
           <p className="text-2xl md:text-5xl text-white">
             Bienvenido nueva plataforma jugable de nuestra marca.
           </p>
-          <p className="text-white text-xs md:text-md">
+          <p className="text-white text-xs md:text-lg">
             Aquí podrás disfrutar de una experiencia única al crear tus equipos
             de jugadores favoritos y competir en partidos emocionantes. Descubre
             las numerosas funciones que ofrecemos, desde personalizar tus
