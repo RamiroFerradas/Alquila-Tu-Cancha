@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTeams } from "./useTeams";
 
-export default function useMatch() {
+export default function usePlayMatch() {
   const { team1, team2 } = useTeams();
   const [viewConfetti, setViewConfetti] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
-
-  // useEffect(() => {
-  //   if (timeLeft !== 0) {
-  //     setViewConfetti(false);
-  //   } else {
-  //     setViewConfetti(true);
-  //     setTimeout(() => {
-  //       setViewConfetti(false);
-  //     }, 6000);
-  //   }
-  // }, [isPlaying, timeLeft]);
 
   const [result, setResult] = useState({
     team1_score: 0,
@@ -76,6 +65,8 @@ export default function useMatch() {
       clearInterval(timer);
       setIsPlaying(false);
       setViewConfetti(true);
+      setTimeLeft(60);
+
       setTimeout(() => {
         setViewConfetti(false);
       }, 6000);

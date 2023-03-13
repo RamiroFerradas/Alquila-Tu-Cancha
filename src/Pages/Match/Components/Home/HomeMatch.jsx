@@ -1,15 +1,15 @@
 import { Navigate } from "react-router-dom";
-import useMatch from "../../../../Hooks/useMatch";
+import usePlayMatch from "../../../../Hooks/usePlayMatch";
 import { useTeams } from "../../../../Hooks/useTeams";
 import Players from "../../../Teams/Components/Players/Players";
-import pelota from "../../Assets/Backgrounds/pelota2.png";
+import pelota from "../../Assets/Pelotas/pelota2.png";
 import ConfettiComponent from "../Confetti/ConfettiComponent";
 
 export default function HomeMatch() {
   const { team1, team2 } = useTeams();
 
   const { timeLeft, startMatch, result, isPlaying, resetMatch, viewConfetti } =
-    useMatch();
+    usePlayMatch();
 
   return team1.players.length !== 5 && team2.players.length !== 5 ? (
     <Navigate to="/" replace />
@@ -45,18 +45,15 @@ export default function HomeMatch() {
             </h3>
             <div className="flex flex-col space-y-4">
               <button
-                className={`py-4 px-8 bg-blue-500 ${
-                  isPlaying
-                    ? `hover:bg-gray-500 bg-gray-600`
-                    : `hover:bg-blue-600`
-                } text-white rounded-lg shadow-lg transition-colors duration-300`}
+                className={`py-4 px-8 bg-blue-500 disabled:hover:bg-gray-500 disabled:bg-gray-600 hover:bg-blue-600 text-white rounded-lg shadow-lg transition-colors duration-300`}
                 onClick={startMatch}
                 disabled={isPlaying}
               >
                 Comenzar partido
               </button>
               <button
-                className="py-4 px-8 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-lg transition-colors duration-300"
+                disabled={!isPlaying}
+                className="py-4 px-8 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-lg transition-colors duration-300 disabled:hover:bg-gray-500 disabled:bg-gray-600 "
                 onClick={resetMatch}
               >
                 Reiniciar partido

@@ -91,13 +91,6 @@ export default function Players({
     [team1.players, team2.players]
   );
 
-  // const [playersRender, setPlayersRender] = useState([]);
-  // useEffect(() => {
-  //   !searchGlobal
-  //     ? setPlayersRender(playerFiltered)
-  //     : setPlayersRender(playerFilteredGlobal);
-  // }, [playerFiltered, playerFilteredGlobal, searchGlobal]);
-
   return (
     <Fragment>
       <Dialog
