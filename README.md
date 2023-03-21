@@ -78,7 +78,7 @@ En **Alquila tu Cancha** deseamos crear una web app `[responsive desktop y mobil
 
 - Al comenzar nos encontramos con una landing page con una breve descripcion de la aplicacion y un boton para ingresar.
 
-<p align="center"><img height="200" src="./src/assets/ScreenShots/landing.jpg" /><p>
+<p align="center"><img height="200" src="./src/assets/ScreenShots/landing.jpg" alt="landingPage" /><p>
 
 <span id="createTeam"></span>
 
