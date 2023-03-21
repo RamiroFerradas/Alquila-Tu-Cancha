@@ -47,16 +47,25 @@ En **Alquila tu Cancha** deseamos crear una web app `[responsive desktop y mobil
 
 ### Instrucciones para iniciar:
 
+- APIKEY:
+
+```bash
+  Generar una apikey ingresando a https://apifootball.com/, crear una cuenta y generarla.
+  Una ez que tenemos nuestra apikey, crear un archivo .env en la raíz del proyecto y crear una variable VITE_API_KEY con la key. Ejemplo: VITE_API_KEY=TU_API_KEY.
+```
+
 - Instalar dependecias ingresando en nuestro terminal el comando:
 
 ```bash
-npm install
+- npm install
+
 ```
 
 - Inicializar ingresando el comando:
 
 ```bash
-npm run dev
+- npm run dev
+
 ```
 
 <span id="recorrido"></span>
