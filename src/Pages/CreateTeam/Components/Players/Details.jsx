@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
 import useFetch from "../../../../Hooks/useFetch";
-import { PLAYER_URL } from "../../../../services";
+import { PLAYER_URL } from "../../../../Services/services";
 import player_unknown from "../../Assets/Player/profile_player.png";
 import {
   Button,

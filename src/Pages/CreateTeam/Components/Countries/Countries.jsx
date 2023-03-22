@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Loader from "../../../../Components/Loader/Loader";
 import useFetch from "../../../../Hooks/useFetch";
-import { COUNTRIES_URL } from "../../../../services";
+import { COUNTRIES_URL } from "../../../../Services/services";
 import { scrollToSeccion } from "../../../../Utils/ScrollToSeccion";
 import SearchBar from "../SearchBar/SearchBar";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Loader from "../../../../Components/Loader/Loader";
 import useFetch from "../../../../Hooks/useFetch";
-import { LEAGUES_URL } from "../../../../services";
+import { LEAGUES_URL } from "../../../../Services/services";
 import { scrollToSeccion } from "../../../../Utils/ScrollToSeccion";
 import SearchBar from "../SearchBar/SearchBar";
 import unknow_league from "../../Assets/Player/unknown_team.jpg";

@@ -15,7 +15,7 @@ import {
 import useFetch from "../../../../Hooks/useFetch";
 import Loader from "../../../../Components/Loader/Loader";
 import SearchBar from "../SearchBar/SearchBar";
-import { TEAMS_URL } from "../../../../services";
+import { TEAMS_URL } from "../../../../Services/services";
 
 export default function Players({
   showModal,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Loader from "../../../../Components/Loader/Loader";
 import useFetch from "../../../../Hooks/useFetch";
-import { TEAMS_URL } from "../../../../services";
+import { TEAMS_URL } from "../../../../Services/services";
 import unknow_team from "../../Assets/Player/unknown_team.jpg";
 import SearchBar from "../SearchBar/SearchBar";
 
