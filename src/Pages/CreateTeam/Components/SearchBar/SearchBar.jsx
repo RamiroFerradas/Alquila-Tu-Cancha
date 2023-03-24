@@ -16,7 +16,7 @@ export default function SearchBar({
     : setTeamFiltered
     ? setTeamFiltered
     : setPlayerFiltered;
-
+  data = data ? data : [];
   const handleFilter = useCallback(
     (input) => {
       const nameFilter = setCountreiesFiltered
@@ -27,10 +27,14 @@ export default function SearchBar({
         ? "team_name"
         : "player_name";
 
-      const filter = data?.filter((info) =>
-        info[nameFilter].toLowerCase().includes(input.toLowerCase())
-      );
-      setFilter(!input.length ? data : filter);
+      if (Array.isArray(data) && data !== null && data !== undefined) {
+        const filter = data.filter((info) =>
+          info?.[nameFilter].toLowerCase().includes(input.toLowerCase())
+        );
+        setFilter(!input.length ? data : filter);
+      } else {
+        console.error("APIKEY VENCIDA/INVALIDA");
+      }
     },
     [data]
   );

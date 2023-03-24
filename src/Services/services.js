@@ -5,7 +5,7 @@ const getAPIURL = (action, params = {}, apikey = VITE_APIKEY) => {
   const queryString = Object.entries(params)
     .map(([key, value]) => `${key}=${value}`)
     .join("&");
-  console.log(`${BASE_URL}?action=${action}&${queryString}&APIkey=${apikey}`);
+
   return `${BASE_URL}?action=${action}&${queryString}&APIkey=${apikey}`;
 };
 
